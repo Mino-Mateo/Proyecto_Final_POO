@@ -1,17 +1,17 @@
 /* Paquetes */
-package com.mycompany.sistema_farmacia;
+package main.java.com.mycompany.sistema_farmacia;
 
 /* Importaciones */
-import com.mycompany.sistema_farmacia.igu.Login;
+import main.java.com.mycompany.sistema_farmacia.gui.Login;
 
-/* Clase Principal */
-public class Sistema_Farmacia {
+/* Clase Main */
+public class Main_Sistema {
 
-    /* Main Ejecutable */
+    /* Inicializador */
     public static void main(String[] args) {
-
-        /* Mostrar Pantalla Login */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
+            /* Primera Pantalla Login */
             public void run() {
                 Login log = new Login();
                 log.setVisible(true);
