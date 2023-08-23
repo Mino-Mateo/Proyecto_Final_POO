@@ -28,7 +28,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel_Titulo.setText("FARMACIAS TU PTM");
+        jLabel_Titulo.setText("FARMACIAS SU SALUD");
 
         javax.swing.GroupLayout jPanel_CajaTituloLayout = new javax.swing.GroupLayout(jPanel_CajaTitulo);
         jPanel_CajaTitulo.setLayout(jPanel_CajaTituloLayout);
