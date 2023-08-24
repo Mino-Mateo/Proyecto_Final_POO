@@ -92,9 +92,9 @@ public class Login extends javax.swing.JFrame {
                         .addGap(65, 65, 65))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CajaLoginLayout.createSequentialGroup()
                         .addGroup(jPanel_CajaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField_Usuario)
-                            .addComponent(jPasswordField_Password, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-                        .addGap(29, 29, 29))))
+                            .addComponent(jTextField_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                            .addComponent(jPasswordField_Password))
+                        .addGap(16, 16, 16))))
         );
         jPanel_CajaLoginLayout.setVerticalGroup(
             jPanel_CajaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +159,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_IngresarActionPerformed
-        jTextField_Usuario.setText("Te la creiste mamon");
+        jTextField_Usuario.setText("Este usuario no existe");
     }//GEN-LAST:event_jButton_IngresarActionPerformed
 
     private void jTextField_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_UsuarioActionPerformed
