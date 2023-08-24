@@ -1,7 +1,10 @@
+/* Paquetes */
 package main.java.com.mycompany.sistema_farmacia.logica;
 
+/* Importaciones */
 import java.sql.*;
 
+/* Clase Publica */
 public final class Conexion_MySQL {
 
     // Variables

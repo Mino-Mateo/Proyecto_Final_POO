@@ -36,8 +36,8 @@ public class Login extends javax.swing.JFrame {
             jPanel_CajaTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_CajaTituloLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addComponent(jLabel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addComponent(jLabel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel_CajaTituloLayout.setVerticalGroup(
             jPanel_CajaTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +123,12 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
                 .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
+                        .addGap(80, 80, 80)
                         .addComponent(jPanel_CajaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jPanel_CajaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel_CajaGeneralLayout.setVerticalGroup(
             jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
