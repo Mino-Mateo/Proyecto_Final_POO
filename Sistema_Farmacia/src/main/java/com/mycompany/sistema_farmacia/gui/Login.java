@@ -1,6 +1,15 @@
 /* Paquetes */
 package main.java.com.mycompany.sistema_farmacia.gui;
 
+/* Importaciones */
+import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
+
+/* Librerias */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /* Extension JFrame */
 public class Login extends javax.swing.JFrame {
 
@@ -61,12 +70,6 @@ public class Login extends javax.swing.JFrame {
         });
 
         jComboBox_Usuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero" }));
-
-        jTextField_Usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_UsuarioActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel_CajaLoginLayout = new javax.swing.GroupLayout(jPanel_CajaLogin);
         jPanel_CajaLogin.setLayout(jPanel_CajaLoginLayout);
@@ -158,13 +161,84 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /* Logica */
     private void jButton_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_IngresarActionPerformed
-        jTextField_Usuario.setText("Este usuario no existe");
+        String usuario = jTextField_Usuario.getText();
+        char[] password = jPasswordField_Password.getPassword();
+        String enteredPassword = new String(password);
+
+        //Verificar el usuario y contraseña en la base de datos
+        boolean usuarioValido = verificarUsuario(usuario, enteredPassword);
+
+        if (usuarioValido)
+        {
+            String tipoUsuario = obtenerTipoUsuario(usuario);
+
+            if ("cajero".equals(tipoUsuario))
+            {
+                // Abre la pantalla de cajero (aún por implementar)
+                // Ejemplo: PantallaCajero pantallaCajero = new PantallaCajero();
+                // pantallaCajero.setVisible(true);
+                // Cierra la pantalla de Login
+                this.dispose();
+            } else if ("admin".equals(tipoUsuario))
+            {
+                // Abrir la pantalla Panel_Administrador_Opciones
+                Panel_Administrador_Opciones panelAdminOpciones = new Panel_Administrador_Opciones();
+                panelAdminOpciones.setVisible(true);
+                // Cierra la pantalla de Login
+                this.dispose();
+            }
+        } else
+        {
+            jTextField_Usuario.setText("Error de ingreso");
+        }
     }//GEN-LAST:event_jButton_IngresarActionPerformed
 
-    private void jTextField_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_UsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_UsuarioActionPerformed
+    // Método para verificar el usuario en la base de datos
+    private boolean verificarUsuario(String usuario, String password) {
+        try (Connection connection = Conexion_MySQL.getConnection())
+        {
+            String querySeleccionar = "SELECT * FROM Usuarios WHERE usuario = ? AND contraseña = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
+            preparedStatement.setString(1, usuario);
+            preparedStatement.setString(2, password);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                return resultSet.next();
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+// Método para obtener el tipo de usuario desde la base de datos
+    private String obtenerTipoUsuario(String usuario) {
+        try (Connection connection = Conexion_MySQL.getConnection())
+        {
+            String querySeleccionar = "SELECT tipo FROM Usuarios WHERE usuario = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
+            preparedStatement.setString(1, usuario);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                if (resultSet.next())
+                {
+                    return resultSet.getString("tipo");
+                } else
+                {
+                    return null;
+                }
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Ingresar;

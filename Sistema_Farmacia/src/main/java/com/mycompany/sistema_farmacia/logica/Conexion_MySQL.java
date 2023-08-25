@@ -8,9 +8,9 @@ import java.sql.*;
 public final class Conexion_MySQL {
 
     // Variables
-    private static final String DB_URL = "jdbc:mysql://localhost/registro";
+    private static final String DB_URL = "jdbc:mysql://localhost/farmacia";
     private static final String USER = "root";
-    private static final String PASS = "root_bas3";
+    private static final String PASS = "12345";
 
     // Constructor privado para evitar instanciación
     private Conexion_MySQL() {
