@@ -1,6 +1,9 @@
 /* Paquetes */
 package main.java.com.mycompany.sistema_farmacia.gui;
 
+/* Importaciones */
+import main.java.com.mycompany.sistema_farmacia.gui.*;
+
 /* Clase Publica */
 public class Panel_Administrador_Opciones extends javax.swing.JFrame {
 
@@ -53,8 +56,18 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
         });
 
         jButton_Historial.setText("Historial de Transacciones");
+        jButton_Historial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_HistorialActionPerformed(evt);
+            }
+        });
 
         jButton_AddCajero.setText("Añadir Cajeros");
+        jButton_AddCajero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AddCajeroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_CajaOpcionesLayout = new javax.swing.GroupLayout(jPanel_CajaOpciones);
         jPanel_CajaOpciones.setLayout(jPanel_CajaOpcionesLayout);
@@ -81,6 +94,11 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
         );
 
         jButton_Salir.setText("Salir");
+        jButton_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_CajaGeneralLayout = new javax.swing.GroupLayout(jPanel_CajaGeneral);
         jPanel_CajaGeneral.setLayout(jPanel_CajaGeneralLayout);
@@ -127,9 +145,45 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /* Logica */
+ /* Boton Stock */
     private void jButton_StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_StockActionPerformed
-        // TODO add your handling code here:
+        // Cerrar Pantalla
+        dispose();
+
+        // Abrir el Stock
+        Panel_Administrador_Stock Stock = new Panel_Administrador_Stock();
+        Stock.setVisible(true);
     }//GEN-LAST:event_jButton_StockActionPerformed
+
+    /* Boton Historial */
+    private void jButton_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HistorialActionPerformed
+        // Cerrar Pantalla
+        dispose();
+
+        // Abrir el Historial (peligroso en la vida real xd)
+        Panel_Administrador_Historial Historial = new Panel_Administrador_Historial();
+        Historial.setVisible(true);
+    }//GEN-LAST:event_jButton_HistorialActionPerformed
+
+    /* Boton Cajeros */
+    private void jButton_AddCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddCajeroActionPerformed
+        // Cerrar Pantalla
+        dispose();
+
+        // Abrir la pantalla de agregar Cajeros
+        Panel_Administrador_Cajeros Cajeros = new Panel_Administrador_Cajeros();
+        Cajeros.setVisible(true);
+    }//GEN-LAST:event_jButton_AddCajeroActionPerformed
+
+    /* Boton Salir */
+    private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
+        // Cerrar Pantalla
+        dispose();
+
+        // Abrir el Login
+        Login loginFrame = new Login();
+        loginFrame.setVisible(true);
+    }//GEN-LAST:event_jButton_SalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_AddCajero;
