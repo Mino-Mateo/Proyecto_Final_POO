@@ -204,7 +204,6 @@ public class Login extends javax.swing.JFrame {
             }
         } catch (SQLException e)
         {
-            e.printStackTrace();
             return false;
         }
     }
