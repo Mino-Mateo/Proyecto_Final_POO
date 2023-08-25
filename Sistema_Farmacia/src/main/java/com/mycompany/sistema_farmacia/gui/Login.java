@@ -1,11 +1,12 @@
-/* Paquetes */
+/* Paquete de Clase */
 package main.java.com.mycompany.sistema_farmacia.gui;
 
 /* Importaciones */
-// Paquetes
+// Clases o Paquetes
 import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
-import javax.swing.JOptionPane;
+
 // Librerias
+import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

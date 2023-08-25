@@ -1,15 +1,18 @@
-/* Paquetes */
+/* Paquete de Clase */
 package main.java.com.mycompany.sistema_farmacia.gui;
 
 /* Importaciones */
-import main.java.com.mycompany.sistema_farmacia.gui.*;
+// Clases o Paquetes
+// Librerias
+import javax.swing.JOptionPane;
 
-/* Clase Publica */
+/* Clase Panel Opciones Administrador */
 public class Panel_Administrador_Opciones extends javax.swing.JFrame {
 
     /* Inicializador */
     public Panel_Administrador_Opciones() {
         initComponents();
+        configurarVentana();
     }
 
     @SuppressWarnings("unchecked")
@@ -145,45 +148,50 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /* Logica */
- /* Boton Stock */
+    // Boton Stock
     private void jButton_StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_StockActionPerformed
-        // Cerrar Pantalla
-        dispose();
-
-        // Abrir el Stock
-        Panel_Administrador_Stock Stock = new Panel_Administrador_Stock();
-        Stock.setVisible(true);
+        manejarPantalla(new Panel_Administrador_Stock());
     }//GEN-LAST:event_jButton_StockActionPerformed
 
-    /* Boton Historial */
+    // Boton Historial
     private void jButton_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HistorialActionPerformed
-        // Cerrar Pantalla
-        dispose();
-
-        // Abrir el Historial (peligroso en la vida real xd)
-        Panel_Administrador_Historial Historial = new Panel_Administrador_Historial();
-        Historial.setVisible(true);
+        manejarPantalla(new Panel_Administrador_Historial());
     }//GEN-LAST:event_jButton_HistorialActionPerformed
 
-    /* Boton Cajeros */
+    // Boton Cajeros
     private void jButton_AddCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddCajeroActionPerformed
-        // Cerrar Pantalla
-        dispose();
+        manejarPantalla(new Panel_Administrador_Cajeros());
 
-        // Abrir la pantalla de agregar Cajeros
-        Panel_Administrador_Cajeros Cajeros = new Panel_Administrador_Cajeros();
-        Cajeros.setVisible(true);
     }//GEN-LAST:event_jButton_AddCajeroActionPerformed
 
-    /* Boton Salir */
+    // Boton Salir 
     private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
-        // Cerrar Pantalla
-        dispose();
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas salir?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION)
+        {
+            volverALogin();
+        }
+    }//GEN-LAST:event_jButton_SalirActionPerformed
 
-        // Abrir el Login
+    /* Funciones */
+    // Manejo de Pantalla
+    private void manejarPantalla(javax.swing.JFrame nuevaPantalla) {
+        dispose();
+        nuevaPantalla.setVisible(true);
+    }
+
+    // Volver al Login
+    private void volverALogin() {
+        dispose();
         Login loginFrame = new Login();
         loginFrame.setVisible(true);
-    }//GEN-LAST:event_jButton_SalirActionPerformed
+    }
+
+    // Configuracion de Pantalla
+    private void configurarVentana() {
+        setLocationRelativeTo(null);
+        setResizable(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_AddCajero;
