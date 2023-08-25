@@ -1,6 +1,12 @@
 /* Paquetes */
 package main.java.com.mycompany.sistema_farmacia.gui;
 
+/* Importaciones */
+import main.java.com.mycompany.sistema_farmacia.gui.Panel_Administrador_Opciones;
+import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /* Clase Publica */
 public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
@@ -17,12 +23,10 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jPanel_Titulo = new javax.swing.JPanel();
         jLabel_Titulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel_ID = new javax.swing.JLabel();
         jLabel_Nombre = new javax.swing.JLabel();
         jLabel_Usuario = new javax.swing.JLabel();
         jLabel_Contraseña = new javax.swing.JLabel();
         jLabel_Tipo = new javax.swing.JLabel();
-        jTextField_ID = new javax.swing.JTextField();
         jTextField_Nombre = new javax.swing.JTextField();
         jTextField_Usuario = new javax.swing.JTextField();
         jPasswordField = new javax.swing.JPasswordField();
@@ -51,9 +55,6 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
             .addComponent(jLabel_Titulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jLabel_ID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel_ID.setText("ID:");
-
         jLabel_Nombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel_Nombre.setText("Nombre:");
 
@@ -66,7 +67,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jLabel_Tipo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel_Tipo.setText("Tipo:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,28 +76,22 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Nombre)
                     .addComponent(jLabel_Usuario)
                     .addComponent(jLabel_Tipo)
                     .addComponent(jLabel_Contraseña))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_ID)
                     .addComponent(jTextField_Nombre)
                     .addComponent(jTextField_Usuario)
                     .addComponent(jPasswordField)
                     .addComponent(jComboBox1, 0, 111, Short.MAX_VALUE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_ID)
-                    .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Nombre)
                     .addComponent(jTextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,6 +111,11 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         );
 
         jButton_Volver.setText("Volver");
+        jButton_Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_VolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_VolverLayout = new javax.swing.GroupLayout(jPanel_Volver);
         jPanel_Volver.setLayout(jPanel_VolverLayout);
@@ -135,8 +135,18 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         );
 
         jButton_Limpiar.setText("Limpiar Pantalla");
+        jButton_Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LimpiarActionPerformed(evt);
+            }
+        });
 
         jButton_Agregar.setText("Agregar Cajero");
+        jButton_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_CajaBotonesLayout = new javax.swing.GroupLayout(jPanel_CajaBotones);
         jPanel_CajaBotones.setLayout(jPanel_CajaBotonesLayout);
@@ -164,12 +174,11 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jPanel_CajaGeneralLayout.setHorizontalGroup(
             jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jPanel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(77, 77, 77)
+                        .addComponent(jPanel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
@@ -207,13 +216,65 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /* Boton Regresar */
+    private void jButton_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VolverActionPerformed
+        // Cerrar Pantalla
+        dispose();
+
+        // Abrir Opciones
+        Panel_Administrador_Opciones Opciones = new Panel_Administrador_Opciones();
+        Opciones.setVisible(true);
+    }//GEN-LAST:event_jButton_VolverActionPerformed
+
+    /* Boton Limpiar Pantalla */
+    private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
+
+        jTextField_Nombre.setText("");
+        jTextField_Usuario.setText("");
+        jPasswordField.setText("");
+    }//GEN-LAST:event_jButton_LimpiarActionPerformed
+
+    // Funcion Mensaje Insertar
+    private void Texto_Insertar() {
+        JOptionPane.showMessageDialog(null, "Elemento Insertado", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /* Boton Agregar */
+    private void jButton_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarActionPerformed
+        String nombre = jTextField_Nombre.getText();
+        String usuario = jTextField_Usuario.getText();
+        String contraseña = new String(jPasswordField.getPassword()); // Obtener la contraseña como String
+        String tipo = (String) jComboBox1.getSelectedItem();
+
+        String QUERY_INSERT_CAJERO = "INSERT INTO Usuarios (nombre, usuario, contraseña, tipo) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_INSERT_CAJERO);)
+        {
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, usuario);
+            pstmt.setString(3, contraseña);
+            pstmt.setString(4, tipo);
+
+            int rowsAffected = pstmt.executeUpdate();
+            Texto_Insertar(); // Asegúrate de tener esta función definida
+
+            // Limpiar los campos después de agregar
+            jTextField_Nombre.setText("");
+            jTextField_Usuario.setText("");
+            jPasswordField.setText("");
+            jComboBox1.setSelectedIndex(0);
+        } catch (SQLException x)
+        {
+            throw new RuntimeException(x);
+        }
+    }//GEN-LAST:event_jButton_AgregarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Agregar;
     private javax.swing.JButton jButton_Limpiar;
     private javax.swing.JButton jButton_Volver;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel_Contraseña;
-    private javax.swing.JLabel jLabel_ID;
     private javax.swing.JLabel jLabel_Nombre;
     private javax.swing.JLabel jLabel_Tipo;
     private javax.swing.JLabel jLabel_Titulo;
@@ -224,7 +285,6 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Titulo;
     private javax.swing.JPanel jPanel_Volver;
     private javax.swing.JPasswordField jPasswordField;
-    private javax.swing.JTextField jTextField_ID;
     private javax.swing.JTextField jTextField_Nombre;
     private javax.swing.JTextField jTextField_Usuario;
     // End of variables declaration//GEN-END:variables

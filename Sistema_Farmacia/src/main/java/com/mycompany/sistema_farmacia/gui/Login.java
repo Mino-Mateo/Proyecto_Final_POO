@@ -2,20 +2,22 @@
 package main.java.com.mycompany.sistema_farmacia.gui;
 
 /* Importaciones */
+// Paquetes
 import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
-
-/* Librerias */
+import javax.swing.JOptionPane;
+// Librerias
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/* Extension JFrame */
+/* Clase Login */
 public class Login extends javax.swing.JFrame {
 
     /* Inicializador de componentes */
     public Login() {
         initComponents();
+        configurarVentana();
     }
 
     @SuppressWarnings("unchecked")
@@ -163,39 +165,30 @@ public class Login extends javax.swing.JFrame {
 
     /* Logica */
     private void jButton_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_IngresarActionPerformed
+
+        // Variables
         String usuario = jTextField_Usuario.getText();
         char[] password = jPasswordField_Password.getPassword();
         String enteredPassword = new String(password);
+        String tipoUsuarioSeleccionado = jComboBox_Usuarios.getSelectedItem().toString().toLowerCase();
 
-        //Verificar el usuario y contraseña en la base de datos
-        boolean usuarioValido = verificarUsuario(usuario, enteredPassword);
-
-        if (usuarioValido)
+        // Verificacion para abrir la pantalla
+        if (comprobacionUsuario(usuario, enteredPassword, tipoUsuarioSeleccionado))
         {
-            String tipoUsuario = obtenerTipoUsuario(usuario);
-
-            if ("cajero".equals(tipoUsuario))
+            if ("cajero".equals(tipoUsuarioSeleccionado))
             {
-                // Abre la pantalla de cajero (aún por implementar)
-                // Ejemplo: PantallaCajero pantallaCajero = new PantallaCajero();
-                // pantallaCajero.setVisible(true);
-                // Cierra la pantalla de Login
-                this.dispose();
-            } else if ("admin".equals(tipoUsuario))
+                abrirPantallaCajero();
+            } else if ("administrador".equals(tipoUsuarioSeleccionado))
             {
-                // Abrir la pantalla Panel_Administrador_Opciones
-                Panel_Administrador_Opciones panelAdminOpciones = new Panel_Administrador_Opciones();
-                panelAdminOpciones.setVisible(true);
-                // Cierra la pantalla de Login
-                this.dispose();
+                abrirPantallaAdministrador();
             }
         } else
         {
-            jTextField_Usuario.setText("Error de ingreso");
+            mostrarMensajeError();
         }
     }//GEN-LAST:event_jButton_IngresarActionPerformed
 
-    // Método para verificar el usuario en la base de datos
+    /* Método para verificar el usuario en la base de datos */
     private boolean verificarUsuario(String usuario, String password) {
         try (Connection connection = Conexion_MySQL.getConnection())
         {
@@ -215,7 +208,7 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
-// Método para obtener el tipo de usuario desde la base de datos
+    /* Método para obtener el tipo de usuario desde la base de datos */
     private String obtenerTipoUsuario(String usuario) {
         try (Connection connection = Conexion_MySQL.getConnection())
         {
@@ -238,6 +231,58 @@ public class Login extends javax.swing.JFrame {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /* Funciones */
+    // Abrir Pantallas del Cajero
+    private void abrirPantallaCajero() {
+        // Abrir la pantalla Panel_Cajero_Opciones
+        // Panel_Administrador_Opciones panelAdminOpciones = new Panel_Administrador_Opciones();
+        // panelAdminOpciones.setVisible(true);
+
+        // Cierra la pantalla de Login
+        this.dispose();
+    }
+
+    // Abrir Pantallas del Aministrador
+    private void abrirPantallaAdministrador() {
+        // Abrir la pantalla Panel_Administrador_Opciones
+        Panel_Administrador_Opciones panelAdminOpciones = new Panel_Administrador_Opciones();
+        panelAdminOpciones.setVisible(true);
+
+        // Cierra la pantalla de Login
+        this.dispose();
+    }
+
+    // Funcion Comprobacion
+    private boolean comprobacionUsuario(String usuario, String password, String tipoUsuarioSeleccionado) {
+        String tipoUsuario = obtenerTipoUsuario(usuario);
+
+        if (tipoUsuario == null)
+        {
+            return false;
+        }
+
+        if (!tipoUsuario.equals(tipoUsuarioSeleccionado))
+        {
+            return false;
+        }
+
+        return verificarUsuario(usuario, password);
+    }
+
+    // Mensaje de error
+    private void mostrarMensajeError() {
+        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de ingreso", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Configurar las pantallas
+    private void configurarVentana() {
+        // Centrar la ventana en el escritorio
+        setLocationRelativeTo(null);
+
+        // Evitar que la ventana pueda ser redimensionada
+        setResizable(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
