@@ -79,7 +79,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero" }));
 
         jLabel_NuevaPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel_NuevaPassword.setText("Nueva Contraseña");
+        jLabel_NuevaPassword.setText("Nueva Contraseña:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
