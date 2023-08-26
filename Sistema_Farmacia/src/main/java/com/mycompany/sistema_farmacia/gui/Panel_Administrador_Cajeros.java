@@ -34,6 +34,8 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jTextField_Usuario = new javax.swing.JTextField();
         jPasswordField = new javax.swing.JPasswordField();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel_NuevaPassword = new javax.swing.JLabel();
+        jPasswordField_Nueva = new javax.swing.JPasswordField();
         jPanel_Volver = new javax.swing.JPanel();
         jButton_Volver = new javax.swing.JButton();
         jPanel_CajaBotones = new javax.swing.JPanel();
@@ -54,7 +56,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
             jPanel_TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_TituloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_Titulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_TituloLayout.setVerticalGroup(
@@ -76,23 +78,28 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero" }));
 
+        jLabel_NuevaPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_NuevaPassword.setText("Nueva Contraseña");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_NuevaPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_Nombre)
                     .addComponent(jLabel_Usuario)
                     .addComponent(jLabel_Tipo)
-                    .addComponent(jLabel_Contraseña))
+                    .addComponent(jLabel_Contraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_Nombre)
                     .addComponent(jTextField_Usuario)
                     .addComponent(jPasswordField)
-                    .addComponent(jComboBox1, 0, 111, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, 0, 111, Short.MAX_VALUE)
+                    .addComponent(jPasswordField_Nueva))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -102,18 +109,22 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Nombre)
                     .addComponent(jTextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Usuario)
                     .addComponent(jTextField_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Contraseña)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_Tipo)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_NuevaPassword)
+                    .addComponent(jPasswordField_Nueva, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_Tipo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -130,7 +141,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
             jPanel_VolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_VolverLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addComponent(jButton_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel_VolverLayout.setVerticalGroup(
@@ -233,10 +244,9 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                     .addComponent(jPanel_Titulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
-                        .addComponent(jPanel_CajaBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(jPanel_CajaBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,8 +255,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,11 +311,6 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_ActualizarTipoActionPerformed
 
     /* Funciones */
-    // Mensaje Insertar
-    private void Texto_Insertar() {
-        JOptionPane.showMessageDialog(null, "Elemento Insertado", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-    }
-
     // Manejo de Pantalla
     private void manejoPantalla(javax.swing.JFrame nuevaPantalla) {
         dispose();
@@ -318,6 +322,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jTextField_Nombre.setText("");
         jTextField_Usuario.setText("");
         jPasswordField.setText("");
+        jPasswordField_Nueva.setText("");
         jComboBox1.setSelectedIndex(0);
     }
 
@@ -331,14 +336,14 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
         String QUERY_INSERT_CAJERO = "INSERT INTO Usuarios (nombre, usuario, contraseña, tipo) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_INSERT_CAJERO))
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_INSERT_CAJERO))
         {
-            pstmt.setString(1, nombre);
-            pstmt.setString(2, usuario);
-            pstmt.setString(3, contraseña);
-            pstmt.setString(4, tipo);
+            cone.setString(1, nombre);
+            cone.setString(2, usuario);
+            cone.setString(3, contraseña);
+            cone.setString(4, tipo);
 
-            int rowsAffected = pstmt.executeUpdate();
+            int rowsAffected = cone.executeUpdate();
             if (rowsAffected > 0)
             {
                 JOptionPane.showMessageDialog(this, "Usuario agregado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -359,28 +364,33 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     // Actualizar Contraseña
     private void actualizarPassword() {
         String usuario = jTextField_Usuario.getText();
-        String nuevaContraseña = new String(jPasswordField.getPassword());
+        String nuevaContraseña = new String(jPasswordField_Nueva.getPassword());
 
-        String QUERY_UPDATE_CONTRASEÑA = "UPDATE Usuarios SET contraseña = ? WHERE usuario = ?";
-
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_UPDATE_CONTRASEÑA))
+        if (!nuevaContraseña.isEmpty())
         {
+            String QUERY_UPDATE_CONTRASEÑA = "UPDATE Usuarios SET contraseña = ? WHERE usuario = ?";
 
-            pstmt.setString(1, nuevaContraseña);
-            pstmt.setString(2, usuario);
+            try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_UPDATE_CONTRASEÑA))
+            {
+                cone.setString(1, nuevaContraseña);
+                cone.setString(2, usuario);
 
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0)
+                int rowsAffected = cone.executeUpdate();
+                if (rowsAffected > 0)
+                {
+                    JOptionPane.showMessageDialog(this, "Contraseña actualizada", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else
+                {
+                    JOptionPane.showMessageDialog(this, "No se encontró el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                limpiarPantalla();
+            } catch (SQLException ex)
             {
-                JOptionPane.showMessageDialog(this, "Contraseña actualizada", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            } else
-            {
-                JOptionPane.showMessageDialog(this, "No se encontró el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+                throw new RuntimeException(ex);
             }
-            limpiarPantalla();
-        } catch (SQLException ex)
+        } else
         {
-            throw new RuntimeException(ex);
+            JOptionPane.showMessageDialog(this, "Complete la nueva contraseña", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -553,6 +563,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel_Contraseña;
     private javax.swing.JLabel jLabel_Nombre;
+    private javax.swing.JLabel jLabel_NuevaPassword;
     private javax.swing.JLabel jLabel_Tipo;
     private javax.swing.JLabel jLabel_Titulo;
     private javax.swing.JLabel jLabel_Usuario;
@@ -562,6 +573,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Titulo;
     private javax.swing.JPanel jPanel_Volver;
     private javax.swing.JPasswordField jPasswordField;
+    private javax.swing.JPasswordField jPasswordField_Nueva;
     private javax.swing.JTextField jTextField_Nombre;
     private javax.swing.JTextField jTextField_Usuario;
     // End of variables declaration//GEN-END:variables
