@@ -65,7 +65,8 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
             }
         });
 
-        jButton_AddCajero.setText("Añadir Cajeros");
+        jButton_AddCajero.setText("Manejar Usuarios");
+        jButton_AddCajero.setActionCommand("Manejar Usuarios");
         jButton_AddCajero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AddCajeroActionPerformed(evt);
@@ -164,7 +165,7 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton_AddCajeroActionPerformed
 
-    // Boton Salir 
+    // Boton Salir
     private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
         int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas salir?", "Confirmación", JOptionPane.YES_NO_OPTION);
         if (opcion == JOptionPane.YES_OPTION)

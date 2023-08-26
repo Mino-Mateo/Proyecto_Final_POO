@@ -46,7 +46,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel_Titulo.setText("Creacion de Usuarios");
+        jLabel_Titulo.setText("Manejo de Usuarios");
 
         javax.swing.GroupLayout jPanel_TituloLayout = new javax.swing.GroupLayout(jPanel_Titulo);
         jPanel_Titulo.setLayout(jPanel_TituloLayout);

@@ -156,7 +156,8 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton_AddCajero">
               <Properties>
-                <Property name="text" type="java.lang.String" value="A&#xf1;adir Cajeros"/>
+                <Property name="text" type="java.lang.String" value="Manejar Usuarios"/>
+                <Property name="actionCommand" type="java.lang.String" value="Manejar Usuarios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_AddCajeroActionPerformed"/>
