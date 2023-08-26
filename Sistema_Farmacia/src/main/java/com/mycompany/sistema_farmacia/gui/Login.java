@@ -6,11 +6,8 @@ package main.java.com.mycompany.sistema_farmacia.gui;
 import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
 
 // Librerias
-import javax.swing.JOptionPane;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.swing.*;
+import java.sql.*;
 
 /* Clase Login */
 public class Login extends javax.swing.JFrame {

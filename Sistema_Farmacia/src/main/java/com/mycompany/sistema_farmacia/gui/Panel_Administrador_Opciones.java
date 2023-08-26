@@ -2,9 +2,8 @@
 package main.java.com.mycompany.sistema_farmacia.gui;
 
 /* Importaciones */
-// Clases o Paquetes
 // Librerias
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /* Clase Panel Opciones Administrador */
 public class Panel_Administrador_Opciones extends javax.swing.JFrame {
