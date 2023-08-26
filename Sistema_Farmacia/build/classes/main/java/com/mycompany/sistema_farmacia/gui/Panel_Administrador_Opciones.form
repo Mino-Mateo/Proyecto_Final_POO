@@ -139,7 +139,7 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="jButton_Stock">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Agregar prodcutos al Stock"/>
+                <Property name="text" type="java.lang.String" value="Stock de Productos"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
@@ -157,7 +157,6 @@
             <Component class="javax.swing.JButton" name="jButton_AddCajero">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Manejar Usuarios"/>
-                <Property name="actionCommand" type="java.lang.String" value="Manejar Usuarios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_AddCajeroActionPerformed"/>

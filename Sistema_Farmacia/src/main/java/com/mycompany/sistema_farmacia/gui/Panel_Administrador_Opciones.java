@@ -50,7 +50,7 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton_Stock.setText("Agregar prodcutos al Stock");
+        jButton_Stock.setText("Stock de Productos");
         jButton_Stock.setToolTipText("");
         jButton_Stock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +66,6 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
         });
 
         jButton_AddCajero.setText("Manejar Usuarios");
-        jButton_AddCajero.setActionCommand("Manejar Usuarios");
         jButton_AddCajero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AddCajeroActionPerformed(evt);

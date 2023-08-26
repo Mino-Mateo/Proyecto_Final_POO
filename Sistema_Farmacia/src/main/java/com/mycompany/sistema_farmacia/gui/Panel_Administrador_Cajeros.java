@@ -277,12 +277,18 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
     // Boton Borrar
     private void jButton_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BorrarActionPerformed
-        int idUsuario = buscarUsuario(jTextField_Usuario.getText());
-        if (idUsuario != -1)
+        String usuario = jTextField_Usuario.getText();
+        char[] passwordChars = jPasswordField.getPassword();
+
+        if (!usuario.isEmpty() && passwordChars.length > 0)
         {
-            borrarUsuario(idUsuario);
-            limpiarPantalla();
+            String contraseña = new String(passwordChars);
+            borrarUsuario(usuario, contraseña);
+        } else
+        {
+            JOptionPane.showMessageDialog(this, "Ingresa el usuario y la contraseña", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        limpiarPantalla();
     }//GEN-LAST:event_jButton_BorrarActionPerformed
 
     // Boton Actualizar Constraseña
@@ -461,22 +467,52 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     }
 
     // Borrar Usuario
-    private void borrarUsuario(int idUsuario) {
-        if (VentasAsociadas(idUsuario))
-        {
-            int respuesta = JOptionPane.showConfirmDialog(this,
-                    "No se puede borrar el Usuario ya que tiene Ventas Asociadas. ¿Quieres borrar las Ventas Asociadas?",
-                    "Ventas Asociadas",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE);
+    private void borrarUsuario(String usuario, String contraseña) {
+        int idUsuario = buscarUsuario(usuario);
 
-            if (respuesta == JOptionPane.YES_OPTION)
+        if (idUsuario != -1 && verificarContraseña(usuario, contraseña))
+        {
+            if (VentasAsociadas(idUsuario))
+            {
+                int respuesta = JOptionPane.showConfirmDialog(this,
+                        "No se puede borrar el Usuario ya que tiene Ventas Asociadas. ¿Quieres borrar las Ventas Asociadas?",
+                        "Ventas Asociadas",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+
+                if (respuesta == JOptionPane.YES_OPTION)
+                {
+                    borrarAsociados(idUsuario);
+                    limpiarPantalla();
+                }
+            } else
             {
                 borrarAsociados(idUsuario);
+                limpiarPantalla();
             }
         } else
         {
-            borrarAsociados(idUsuario);
+            JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Verificar Contraseña
+    private boolean verificarContraseña(String usuario, String contraseña) {
+        String QUERY_VERIFICAR_CONTRASEÑA = "SELECT COUNT(*) FROM Usuarios WHERE usuario = ? AND contraseña = ?";
+
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_VERIFICAR_CONTRASEÑA))
+        {
+
+            cone.setString(1, usuario);
+            cone.setString(2, contraseña);
+
+            try (ResultSet rs = cone.executeQuery())
+            {
+                return rs.next() && rs.getInt(1) > 0;
+            }
+        } catch (SQLException x)
+        {
+            throw new RuntimeException(x);
         }
     }
 
