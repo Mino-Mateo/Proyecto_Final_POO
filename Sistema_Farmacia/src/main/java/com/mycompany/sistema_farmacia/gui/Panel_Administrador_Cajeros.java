@@ -1,18 +1,21 @@
-/* Paquetes */
+/* Paquete de Clase */
 package main.java.com.mycompany.sistema_farmacia.gui;
 
 /* Importaciones */
-import main.java.com.mycompany.sistema_farmacia.gui.Panel_Administrador_Opciones;
+// Clases o Paquetes
 import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
-import java.sql.*;
-import javax.swing.JOptionPane;
 
-/* Clase Publica */
+// Librerias
+import java.sql.*;
+import javax.swing.*;
+
+/* Clase Panel Usuarios Administrador */
 public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
     /* Inicializador */
     public Panel_Administrador_Cajeros() {
         initComponents();
+        configurarVentana();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,19 +39,23 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jPanel_CajaBotones = new javax.swing.JPanel();
         jButton_Limpiar = new javax.swing.JButton();
         jButton_Agregar = new javax.swing.JButton();
+        jButton_Borrar = new javax.swing.JButton();
+        jButton_ActualizarPassword = new javax.swing.JButton();
+        jButton_ActualizarTipo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel_Titulo.setText("Creacion de Cajeros");
+        jLabel_Titulo.setText("Creacion de Usuarios");
 
         javax.swing.GroupLayout jPanel_TituloLayout = new javax.swing.GroupLayout(jPanel_Titulo);
         jPanel_Titulo.setLayout(jPanel_TituloLayout);
         jPanel_TituloLayout.setHorizontalGroup(
             jPanel_TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_TituloLayout.createSequentialGroup()
-                .addComponent(jLabel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_TituloLayout.setVerticalGroup(
             jPanel_TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +114,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_Tipo)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton_Volver.setText("Volver");
@@ -141,10 +148,31 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
             }
         });
 
-        jButton_Agregar.setText("Agregar Cajero");
+        jButton_Agregar.setText("Agregar Usuario");
         jButton_Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AgregarActionPerformed(evt);
+            }
+        });
+
+        jButton_Borrar.setText("Borrar Usuario");
+        jButton_Borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BorrarActionPerformed(evt);
+            }
+        });
+
+        jButton_ActualizarPassword.setText("Actualizar Contraseña \nUsuario");
+        jButton_ActualizarPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ActualizarPasswordActionPerformed(evt);
+            }
+        });
+
+        jButton_ActualizarTipo.setText("Actualizar Tipo Usuario");
+        jButton_ActualizarTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ActualizarTipoActionPerformed(evt);
             }
         });
 
@@ -152,21 +180,30 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jPanel_CajaBotones.setLayout(jPanel_CajaBotonesLayout);
         jPanel_CajaBotonesLayout.setHorizontalGroup(
             jPanel_CajaBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CajaBotonesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel_CajaBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton_Limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(jButton_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel_CajaBotonesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_CajaBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_ActualizarPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Borrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Limpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_ActualizarTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel_CajaBotonesLayout.setVerticalGroup(
             jPanel_CajaBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CajaBotonesLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jButton_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGap(30, 30, 30)
+                .addComponent(jButton_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jButton_ActualizarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jButton_ActualizarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jButton_Borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jButton_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout jPanel_CajaGeneralLayout = new javax.swing.GroupLayout(jPanel_CajaGeneral);
@@ -176,7 +213,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
             .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
                 .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addGap(25, 25, 25)
                         .addComponent(jPanel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -196,17 +233,20 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                     .addComponent(jPanel_Titulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
                         .addComponent(jPanel_CajaBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,39 +256,76 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /* Boton Regresar */
+    // Boton Regresar
     private void jButton_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VolverActionPerformed
-        // Cerrar Pantalla
-        dispose();
-
-        // Abrir Opciones
-        Panel_Administrador_Opciones Opciones = new Panel_Administrador_Opciones();
-        Opciones.setVisible(true);
+        manejoPantalla(new Panel_Administrador_Opciones());
     }//GEN-LAST:event_jButton_VolverActionPerformed
 
-    /* Boton Limpiar Pantalla */
+    // Boton Limpiar
     private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
-
-        jTextField_Nombre.setText("");
-        jTextField_Usuario.setText("");
-        jPasswordField.setText("");
+        limpiarPantalla();
     }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
-    // Funcion Mensaje Insertar
+    // Boton Agregar
+    private void jButton_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarActionPerformed
+        String nombre = jTextField_Nombre.getText();
+        String usuario = jTextField_Usuario.getText();
+        String contraseña = new String(jPasswordField.getPassword());
+        String tipo = (String) jComboBox1.getSelectedItem();
+        agregarUsuario(nombre, usuario, contraseña, tipo);
+    }//GEN-LAST:event_jButton_AgregarActionPerformed
+
+    // Boton Borrar
+    private void jButton_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BorrarActionPerformed
+        int idUsuario = buscarUsuario(jTextField_Usuario.getText());
+        if (idUsuario != -1)
+        {
+            borrarUsuario(idUsuario);
+            limpiarPantalla();
+        }
+    }//GEN-LAST:event_jButton_BorrarActionPerformed
+
+    // Boton Actualizar Constraseña
+    private void jButton_ActualizarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarPasswordActionPerformed
+        actualizarPassword();
+    }//GEN-LAST:event_jButton_ActualizarPasswordActionPerformed
+
+    // Boton Actualizar Tipo
+    private void jButton_ActualizarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarTipoActionPerformed
+        actualizarTipo();
+    }//GEN-LAST:event_jButton_ActualizarTipoActionPerformed
+
+    /* Funciones */
+    // Mensaje Insertar
     private void Texto_Insertar() {
         JOptionPane.showMessageDialog(null, "Elemento Insertado", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /* Boton Agregar */
-    private void jButton_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarActionPerformed
-        String nombre = jTextField_Nombre.getText();
-        String usuario = jTextField_Usuario.getText();
-        String contraseña = new String(jPasswordField.getPassword()); // Obtener la contraseña como String
-        String tipo = (String) jComboBox1.getSelectedItem();
+    // Manejo de Pantalla
+    private void manejoPantalla(javax.swing.JFrame nuevaPantalla) {
+        dispose();
+        nuevaPantalla.setVisible(true);
+    }
+
+    // Limpiar Pantalla
+    private void limpiarPantalla() {
+        jTextField_Nombre.setText("");
+        jTextField_Usuario.setText("");
+        jPasswordField.setText("");
+        jComboBox1.setSelectedIndex(0);
+    }
+
+    // Agregar Usuarios
+    private void agregarUsuario(String nombre, String usuario, String contraseña, String tipo) {
+        if (nombre.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || tipo.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         String QUERY_INSERT_CAJERO = "INSERT INTO Usuarios (nombre, usuario, contraseña, tipo) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_INSERT_CAJERO);)
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_INSERT_CAJERO))
         {
             pstmt.setString(1, nombre);
             pstmt.setString(2, usuario);
@@ -256,21 +333,185 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
             pstmt.setString(4, tipo);
 
             int rowsAffected = pstmt.executeUpdate();
-            Texto_Insertar(); // Asegúrate de tener esta función definida
+            if (rowsAffected > 0)
+            {
+                JOptionPane.showMessageDialog(this, "Usuario agregado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else
+            {
+                JOptionPane.showMessageDialog(this, "Error al ingresar, este usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            limpiarPantalla();
+        } catch (SQLIntegrityConstraintViolationException duplicateKeyException)
+        {
+            JOptionPane.showMessageDialog(this, "Error al ingresar, este usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+    }
 
-            // Limpiar los campos después de agregar
-            jTextField_Nombre.setText("");
-            jTextField_Usuario.setText("");
-            jPasswordField.setText("");
-            jComboBox1.setSelectedIndex(0);
+    // Actualizar Contraseña
+    private void actualizarPassword() {
+        String usuario = jTextField_Usuario.getText();
+        String nuevaContraseña = new String(jPasswordField.getPassword());
+
+        String QUERY_UPDATE_CONTRASEÑA = "UPDATE Usuarios SET contraseña = ? WHERE usuario = ?";
+
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_UPDATE_CONTRASEÑA))
+        {
+
+            pstmt.setString(1, nuevaContraseña);
+            pstmt.setString(2, usuario);
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0)
+            {
+                JOptionPane.showMessageDialog(this, "Contraseña actualizada", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else
+            {
+                JOptionPane.showMessageDialog(this, "No se encontró el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            limpiarPantalla();
+        } catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    // Actualizar Tipo
+    private void actualizarTipo() {
+        String usuario = jTextField_Usuario.getText();
+        String nuevoTipo = (String) jComboBox1.getSelectedItem();
+
+        String QUERY_UPDATE_TIPO = "UPDATE Usuarios SET tipo = ? WHERE usuario = ?";
+
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_UPDATE_TIPO))
+        {
+
+            pstmt.setString(1, nuevoTipo);
+            pstmt.setString(2, usuario);
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0)
+            {
+                JOptionPane.showMessageDialog(this, "Tipo de usuario actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else
+            {
+                JOptionPane.showMessageDialog(this, "No se encontró el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            limpiarPantalla();
+        } catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    // Buscar Usuario
+    private int buscarUsuario(String textoUsuario) {
+        String QUERY_OBTENER_ID = "SELECT id FROM Usuarios WHERE usuario = ?";
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_OBTENER_ID))
+        {
+            pstmt.setString(1, textoUsuario);
+            try (ResultSet rs = pstmt.executeQuery())
+            {
+                if (rs.next())
+                {
+                    return rs.getInt("id");
+                }
+            }
         } catch (SQLException x)
         {
             throw new RuntimeException(x);
         }
-    }//GEN-LAST:event_jButton_AgregarActionPerformed
+        return -1;
+    }
+
+    // Borrar Transacciones y Ventas Asociadas
+    private void borrarAsociados(int idUsuario) {
+        String DELETE_DETALLES = "DELETE FROM detallestransaccion WHERE id_transaccion IN (SELECT id FROM Transacciones WHERE id_cajero = ?)";
+        String DELETE_TRANSACCIONES = "DELETE FROM Transacciones WHERE id_cajero = ?";
+        String DELETE_VENTAS = "DELETE FROM ventas WHERE id_cajero = ?";
+        String DELETE_USUARIO = "DELETE FROM Usuarios WHERE id = ?";
+
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement coneDetalles = conn.prepareStatement(DELETE_DETALLES); PreparedStatement coneTransacciones = conn.prepareStatement(DELETE_TRANSACCIONES); PreparedStatement pstmtVentas = conn.prepareStatement(DELETE_VENTAS); PreparedStatement pstmtUsuario = conn.prepareStatement(DELETE_USUARIO))
+        {
+
+            conn.setAutoCommit(false);
+
+            coneDetalles.setInt(1, idUsuario);
+            coneDetalles.executeUpdate();
+
+            coneTransacciones.setInt(1, idUsuario);
+            coneTransacciones.executeUpdate();
+
+            pstmtVentas.setInt(1, idUsuario);
+            pstmtVentas.executeUpdate();
+
+            pstmtUsuario.setInt(1, idUsuario);
+            pstmtUsuario.executeUpdate();
+
+            conn.commit();
+
+            JOptionPane.showMessageDialog(this, "Usuario Borrado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException x)
+        {
+            throw new RuntimeException(x);
+        }
+    }
+
+    // Borrar Usuario
+    private void borrarUsuario(int idUsuario) {
+        if (VentasAsociadas(idUsuario))
+        {
+            int respuesta = JOptionPane.showConfirmDialog(this,
+                    "No se puede borrar el Usuario ya que tiene Ventas Asociadas. ¿Quieres borrar las Ventas Asociadas?",
+                    "Ventas Asociadas",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+
+            if (respuesta == JOptionPane.YES_OPTION)
+            {
+                borrarAsociados(idUsuario);
+            }
+        } else
+        {
+            borrarAsociados(idUsuario);
+        }
+    }
+
+    // Verificar si hay Ventas Asociadas
+    private boolean VentasAsociadas(int idUsuario) {
+        String QUERY_VERIFICAR_VENTAS = "SELECT COUNT(*) FROM ventas WHERE id_cajero = ?";
+
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_VERIFICAR_VENTAS))
+        {
+
+            cone.setInt(1, idUsuario);
+            try (ResultSet rs = cone.executeQuery())
+            {
+                return rs.next() && rs.getInt(1) > 0;
+            }
+        } catch (SQLException x)
+        {
+            throw new RuntimeException(x);
+        }
+    }
+
+    // Configurar las pantallas
+    private void configurarVentana() {
+        // Centrar la ventana en el escritorio
+        setLocationRelativeTo(null);
+
+        // Evitar que la ventana pueda ser redimensionada
+        setResizable(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_ActualizarPassword;
+    private javax.swing.JButton jButton_ActualizarTipo;
     private javax.swing.JButton jButton_Agregar;
+    private javax.swing.JButton jButton_Borrar;
     private javax.swing.JButton jButton_Limpiar;
     private javax.swing.JButton jButton_Volver;
     private javax.swing.JComboBox<String> jComboBox1;
