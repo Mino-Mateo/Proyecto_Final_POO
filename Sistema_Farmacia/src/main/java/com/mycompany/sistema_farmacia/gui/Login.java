@@ -169,17 +169,19 @@ public class Login extends javax.swing.JFrame {
 
         // Variables
         String usuario = jTextField_Usuario.getText();
-        char[] password = jPasswordField_Password.getPassword();
-        String enteredPassword = new String(password);
-        String tipoUsuarioSeleccionado = jComboBox_Usuarios.getSelectedItem().toString().toLowerCase();
+        String password = new String(jPasswordField_Password.getPassword());
+        String tipoUsuarioSeleccionado = jComboBox_Usuarios.getSelectedItem().toString();
 
         // Verificacion para abrir la pantalla
-        if (comprobacionUsuario(usuario, enteredPassword, tipoUsuarioSeleccionado))
+        if (comprobacionUsuario(usuario, password, tipoUsuarioSeleccionado))
         {
-            if ("cajero".equals(tipoUsuarioSeleccionado))
+            // Convertir el tipo de usuario seleccionado a mayúscula inicial
+            tipoUsuarioSeleccionado = tipoUsuarioSeleccionado.substring(0, 1).toUpperCase() + tipoUsuarioSeleccionado.substring(1);
+
+            if ("Cajero".equals(tipoUsuarioSeleccionado))
             {
                 abrirPantallaCajero();
-            } else if ("administrador".equals(tipoUsuarioSeleccionado))
+            } else if ("Administrador".equals(tipoUsuarioSeleccionado))
             {
                 abrirPantallaAdministrador();
             }
