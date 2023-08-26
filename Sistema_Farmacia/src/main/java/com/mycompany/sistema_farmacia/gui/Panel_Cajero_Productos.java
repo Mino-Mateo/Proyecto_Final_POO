@@ -27,90 +27,18 @@ public class Panel_Cajero_Productos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        RadioButton_Producto1 = new javax.swing.JRadioButton();
-        RadioButton_Producto2 = new javax.swing.JRadioButton();
-        RadioButton_Producto3 = new javax.swing.JRadioButton();
-        RadioButton_Producto4 = new javax.swing.JRadioButton();
-        RadioButton_Producto5 = new javax.swing.JRadioButton();
-        RadioButton_Producto6 = new javax.swing.JRadioButton();
         Texto_Lista_Productos = new javax.swing.JLabel();
         Texto_Titulo_Productos = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-
-        RadioButton_Producto1.setBackground(new java.awt.Color(204, 204, 204));
-        RadioButton_Producto1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        RadioButton_Producto1.setText("Otros Productos");
-        RadioButton_Producto1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RadioButton_Producto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        RadioButton_Producto1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        RadioButton_Producto1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioButton_Producto1ActionPerformed(evt);
-            }
-        });
-
-        RadioButton_Producto2.setBackground(new java.awt.Color(204, 204, 204));
-        RadioButton_Producto2.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        RadioButton_Producto2.setText("$50");
-        RadioButton_Producto2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        RadioButton_Producto2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RadioButton_Producto2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        RadioButton_Producto2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        RadioButton_Producto2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioButton_Producto2ActionPerformed(evt);
-            }
-        });
-
-        RadioButton_Producto3.setBackground(new java.awt.Color(204, 204, 204));
-        RadioButton_Producto3.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        RadioButton_Producto3.setText("$150");
-        RadioButton_Producto3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RadioButton_Producto3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        RadioButton_Producto3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        RadioButton_Producto3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioButton_Producto3ActionPerformed(evt);
-            }
-        });
-
-        RadioButton_Producto4.setBackground(new java.awt.Color(204, 204, 204));
-        RadioButton_Producto4.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        RadioButton_Producto4.setText("$250");
-        RadioButton_Producto4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RadioButton_Producto4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        RadioButton_Producto4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        RadioButton_Producto4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioButton_Producto4ActionPerformed(evt);
-            }
-        });
-
-        RadioButton_Producto5.setBackground(new java.awt.Color(204, 204, 204));
-        RadioButton_Producto5.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        RadioButton_Producto5.setText("$100");
-        RadioButton_Producto5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RadioButton_Producto5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        RadioButton_Producto5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        RadioButton_Producto5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioButton_Producto5ActionPerformed(evt);
-            }
-        });
-
-        RadioButton_Producto6.setBackground(new java.awt.Color(204, 204, 204));
-        RadioButton_Producto6.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        RadioButton_Producto6.setText("$200");
-        RadioButton_Producto6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RadioButton_Producto6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        RadioButton_Producto6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        RadioButton_Producto6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioButton_Producto6ActionPerformed(evt);
-            }
-        });
 
         Texto_Lista_Productos.setFont(new java.awt.Font("Yu Gothic Medium", 1, 14)); // NOI18N
         Texto_Lista_Productos.setText("Elegir Producto");
@@ -118,36 +46,72 @@ public class Panel_Cajero_Productos extends javax.swing.JFrame {
         Texto_Titulo_Productos.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
         Texto_Titulo_Productos.setText("Lista de Productos");
 
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setText("$50");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton2.setBackground(new java.awt.Color(204, 204, 204));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton2.setText("$100");
+        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(204, 204, 204));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setText("$150");
+        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton4.setBackground(new java.awt.Color(204, 204, 204));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton4.setText("$300");
+        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton5.setBackground(new java.awt.Color(204, 204, 204));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton5.setText("$250");
+        jButton5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton6.setBackground(new java.awt.Color(204, 204, 204));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton6.setText("Otros Productos");
+        jButton6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton7.setBackground(new java.awt.Color(255, 51, 51));
+        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton7.setText("Salir");
+        jButton7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(72, 72, 72)
-                                    .addComponent(Texto_Lista_Productos))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(35, 35, 35)
-                                    .addComponent(Texto_Titulo_Productos)))
-                            .addGap(52, 52, 52))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(89, 89, 89)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(RadioButton_Producto4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(RadioButton_Producto3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(RadioButton_Producto2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(RadioButton_Producto6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RadioButton_Producto5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RadioButton_Producto1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(105, Short.MAX_VALUE))
+                    .addComponent(Texto_Titulo_Productos)
+                    .addComponent(Texto_Lista_Productos))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(228, 228, 228))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,46 +121,28 @@ public class Panel_Cajero_Productos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Texto_Lista_Productos)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RadioButton_Producto5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RadioButton_Producto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RadioButton_Producto3)
-                    .addComponent(RadioButton_Producto6))
-                .addGap(47, 47, 47)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RadioButton_Producto4)
-                    .addComponent(RadioButton_Producto1))
-                .addContainerGap(113, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RadioButton_Producto6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButton_Producto6ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_RadioButton_Producto6ActionPerformed
-
-    private void RadioButton_Producto5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButton_Producto5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RadioButton_Producto5ActionPerformed
-
-    private void RadioButton_Producto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButton_Producto4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RadioButton_Producto4ActionPerformed
-
-    private void RadioButton_Producto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButton_Producto3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RadioButton_Producto3ActionPerformed
-
-    private void RadioButton_Producto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButton_Producto2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RadioButton_Producto2ActionPerformed
-
-    private void RadioButton_Producto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButton_Producto1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RadioButton_Producto1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,13 +180,14 @@ public class Panel_Cajero_Productos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton RadioButton_Producto1;
-    private javax.swing.JRadioButton RadioButton_Producto2;
-    private javax.swing.JRadioButton RadioButton_Producto3;
-    private javax.swing.JRadioButton RadioButton_Producto4;
-    private javax.swing.JRadioButton RadioButton_Producto5;
-    private javax.swing.JRadioButton RadioButton_Producto6;
     private javax.swing.JLabel Texto_Lista_Productos;
     private javax.swing.JLabel Texto_Titulo_Productos;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     // End of variables declaration//GEN-END:variables
 }
