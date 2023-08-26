@@ -6,7 +6,6 @@ package main.java.com.mycompany.sistema_farmacia.gui;
 import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
 
 // Librerias
-import javax.swing.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -267,7 +266,7 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
 
     // Boton Imprimir
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     // Boton Regresar
