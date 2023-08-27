@@ -364,7 +364,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
 
                     // Crear una nueva transacción en la base de datos y obtener su ID
                     int idTransaccion = guardarTransaccion(idCajero);
-                    System.out.println("ID de Transacción: " + idTransaccion);
+                    System.out.println("ID de Transaccion: " + idTransaccion);
 
                     // Procesar cada producto en el carrito y guardar detalles de transacción
                     for (ProductoCarrito producto : carrito)
@@ -386,7 +386,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                     System.out.println("Carrito limpiado");
                 } catch (NumberFormatException e)
                 {
-                    mostrarMensajeError("Por favor, ingrese un ID de Cajero válido.");
+                    mostrarMensajeError("Por favor, ingrese un ID de Cajero valido.");
                 }
             }
         }
