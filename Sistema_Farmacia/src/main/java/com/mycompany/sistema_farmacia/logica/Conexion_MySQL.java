@@ -12,6 +12,19 @@ public final class Conexion_MySQL {
     private static final String USER = "root";
     private static final String PASS = "12345";
 
+    public static void cerrarConexion(Connection connection) {
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     // Constructor privado para evitar instanciación
     private Conexion_MySQL() {
         // Constructor vacío o lógica adicional si es necesario

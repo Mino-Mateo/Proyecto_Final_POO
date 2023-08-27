@@ -235,9 +235,9 @@ public class Login extends javax.swing.JFrame {
     /* Funciones */
     // Abrir Pantallas del Cajero
     private void abrirPantallaCajero() {
-        // Abrir la pantalla Panel_Cajero_Opciones
-        // Panel_Administrador_Opciones panelAdminOpciones = new Panel_Administrador_Opciones();
-        // panelAdminOpciones.setVisible(true);
+        // Abrir la pantalla Panel_Cajero_Ventas
+        Panel_Cajero_Ventas panelCajeroVentas = new Panel_Cajero_Ventas();
+        panelCajeroVentas.setVisible(true);
 
         // Cierra la pantalla de Login
         this.dispose();
