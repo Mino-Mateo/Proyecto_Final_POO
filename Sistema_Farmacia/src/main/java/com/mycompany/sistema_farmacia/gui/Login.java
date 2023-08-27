@@ -163,7 +163,6 @@ public class Login extends javax.swing.JFrame {
 
     /* Logica */
     private void jButton_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_IngresarActionPerformed
-
         // Variables
         String usuario = jTextField_Usuario.getText();
         String password = new String(jPasswordField_Password.getPassword());

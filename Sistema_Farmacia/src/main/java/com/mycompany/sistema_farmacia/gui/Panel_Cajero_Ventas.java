@@ -29,7 +29,8 @@ class ProductoCarrito {
         return cantidad;
     }
 
-    public ProductoCarrito(String nombre, int cantidad) {
+    public ProductoCarrito(int idProducto, String nombre, int cantidad) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
@@ -312,6 +313,16 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         }
 
         String nombreProducto = (String) jTable_Productos.getValueAt(selectedRow, 1);
+        int idProducto = obtenerIdProductoPorNombre(nombreProducto); // Obtener el ID del producto
+        int stockDisponible = obtenerStockProducto(idProducto); // Obtener el stock del producto
+        System.out.println("Stock disponible: " + stockDisponible);
+
+        if (stockDisponible <= 0)
+        {
+            mostrarMensajeError("No hay stock disponible para este producto");
+            return;
+        }
+
         String cantidadStr = obtenerInput("Ingrese la cantidad de producto a añadir:", "Agregar a Venta");
 
         if (cantidadStr != null && !cantidadStr.isEmpty())
@@ -319,11 +330,11 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
             try
             {
                 int cantidad = Integer.parseInt(cantidadStr);
-                int stockDisponible = obtenerStockProducto(selectedRow);
+                System.out.println("Cantidad ingresada: " + cantidad);
 
                 if (cantidad > 0 && cantidad <= stockDisponible)
                 {
-                    carrito.add(new ProductoCarrito(nombreProducto, cantidad));
+                    agregarProductoAlCarrito(idProducto, nombreProducto, cantidad);
                     mostrarMensajeConfirmacion(cantidad + " unidades de " + nombreProducto + " agregadas al carrito", "Producto Agregado");
                     mostrarElementosCarrito();
                 } else
@@ -339,96 +350,64 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
 
     // Boton Confirmar Venta
     private void jButton_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConfirmarActionPerformed
-        int idCajero = obtenerIdUsuarioActual();
-        if (idCajero != -1)
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea continuar con la transacción?", "Confirmar Venta", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta == JOptionPane.YES_OPTION)
         {
-            int idTransaccion = guardarTransaccion(idCajero);
+            String idCajeroStr = JOptionPane.showInputDialog(this, "Ingrese su ID de Cajero:");
 
-            for (ProductoCarrito producto : carrito)
+            if (idCajeroStr != null && !idCajeroStr.isEmpty())
             {
-                int idProducto = obtenerIdProducto(producto.getNombre());
-                int cantidad = producto.getCantidad();
+                try
+                {
+                    int idCajero = Integer.parseInt(idCajeroStr);
 
-                // Llamar a la función para guardar el detalle de transacción en la base de datos
-                guardarDetalleTransaccion(idTransaccion, idProducto, cantidad);
+                    // Crear una nueva transacción en la base de datos y obtener su ID
+                    int idTransaccion = guardarTransaccion(idCajero);
+                    System.out.println("ID de Transacción: " + idTransaccion);
 
-                // Actualizar el stock en la base de datos
-                int stockActual = obtenerStockProducto(idProducto);
-                int nuevoStock = stockActual - cantidad;
-                actualizarStockEnBaseDeDatos(idProducto, nuevoStock);
+                    // Procesar cada producto en el carrito y guardar detalles de transacción
+                    for (ProductoCarrito producto : carrito)
+                    {
+                        int idProducto = obtenerIdProductoPorNombre(producto.getNombre());
+                        int cantidad = producto.getCantidad();
+                        System.out.println("Producto: " + producto.getNombre() + ", Cantidad: " + cantidad);
+
+                        guardarDetalleTransaccion(idTransaccion, idProducto, cantidad);
+
+                        int stockActual = obtenerStockProducto(idProducto);
+                        int nuevoStock = stockActual - cantidad;
+                        actualizarStockEnBaseDeDatos(idProducto, nuevoStock);
+                    }
+
+                    mostrarMensajeInformacion("Venta realizada exitosamente", "Venta Realizada");
+
+                    carrito.clear(); // Limpiar el carrito después de la venta
+                    System.out.println("Carrito limpiado");
+                } catch (NumberFormatException e)
+                {
+                    mostrarMensajeError("Por favor, ingrese un ID de Cajero válido.");
+                }
             }
-
-            mostrarMensajeInformacion("Venta realizada exitosamente", "Venta Realizada");
-
-            carrito.clear();
         }
     }//GEN-LAST:event_jButton_ConfirmarActionPerformed
 
     // Boton Cancelar Venta
     private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro de cancelar la venta?", "Cancelar Venta", JOptionPane.YES_NO_OPTION);
 
+        if (respuesta == JOptionPane.YES_OPTION)
+        {
+            // Limpiar el carrito y mostrar mensaje de cancelación
+            carrito.clear();
+            mostrarMensajeInformacion("Venta cancelada. El carrito ha sido vaciado.", "Venta Cancelada");
+        }
     }//GEN-LAST:event_jButton_CancelarActionPerformed
 
-    // Mensaje Error
-    private void mostrarMensajeError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    // Mensaje Ingreso Productos
-    private String obtenerInput(String mensaje, String titulo) {
-        return JOptionPane.showInputDialog(this, mensaje, titulo, JOptionPane.PLAIN_MESSAGE);
-    }
-
-    // Mensaje Confirmacion
-    private void mostrarMensajeConfirmacion(String mensaje, String titulo) {
-        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    // Mensaje Informacion
-    private void mostrarMensajeInformacion(String mensaje, String titulo) {
-        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    // Mostrar Carrito de Compras
-    private void mostrarElementosCarrito() {
-        StringBuilder mensaje = new StringBuilder();
-        mensaje.append("Productos en el carrito:\n");
-
-        for (ProductoCarrito producto : carrito)
-        {
-            mensaje.append(producto.getCantidad()).append(" unidades de ").append(producto.getNombre()).append("\n");
-        }
-
-        JOptionPane.showMessageDialog(this, mensaje.toString(), "Carrito de Compras", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    // Producto Seleccionado
-    private int obtenerStockProducto(int selectedRow) {
-        return (int) jTable_Productos.getValueAt(selectedRow, 3);
-    }
-
-    // Función para actualizar el stock de un producto en la base de datos
-    private void actualizarStockEnBaseDeDatos(int idProducto, int nuevoStock) {
-        Connection connection = Conexion_MySQL.getConnection();
-
-        if (connection != null)
-        {
-            try
-            {
-                String query = "UPDATE Productos SET stock = ? WHERE id = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setInt(1, nuevoStock);
-                preparedStatement.setInt(2, idProducto);
-
-                preparedStatement.executeUpdate();
-            } catch (SQLException e)
-            {
-                e.printStackTrace();
-            } finally
-            {
-                Conexion_MySQL.cerrarConexion(connection);
-            }
-        }
+    // Método para agregar un producto al carrito
+    private void agregarProductoAlCarrito(int idProducto, String nombre, int cantidad) {
+        ProductoCarrito productoEnCarrito = new ProductoCarrito(idProducto, nombre, cantidad);
+        carrito.add(productoEnCarrito);
     }
 
     // Guardado de transaccion
@@ -473,11 +452,13 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         {
             try
             {
-                String query = "INSERT INTO DetallesTransaccion (id_transaccion, id_producto, cantidad) VALUES (?, ?, ?)";
+                String nombreProducto = obtenerNombreProducto(idProducto); // Obtener el nombre del producto
+                String query = "INSERT INTO DetallesTransaccion (id_transaccion, id_producto, nombre_producto, cantidad) VALUES (?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setInt(1, idTransaccion);
                 preparedStatement.setInt(2, idProducto);
-                preparedStatement.setInt(3, cantidad);
+                preparedStatement.setString(3, nombreProducto); // Usar el nombre del producto obtenido
+                preparedStatement.setInt(4, cantidad);
 
                 preparedStatement.executeUpdate();
             } catch (SQLException e)
@@ -490,19 +471,11 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         }
     }
 
-    // Función para obtener el ID del usuario actual
-    private int obtenerIdUsuarioActual() {
-        // Aquí implementa la lógica para obtener el ID del usuario actual
-        // Puede ser a través de una sesión de usuario o cualquier otro método
-        // Ejemplo: return usuarioActual.getId();
-        return 1;
-    }
-
-    // Función para obtener el ID de un producto por su nombre
-    private int obtenerIdProducto(String nombreProducto) {
-        int idProducto = -1; // Valor por defecto en caso de no encontrar el producto
-
+    // ID Seleccionado
+    private int obtenerIdProductoPorNombre(String nombreProducto) {
         Connection connection = Conexion_MySQL.getConnection();
+        int idProducto = -1;
+
         if (connection != null)
         {
             try
@@ -510,8 +483,8 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                 String query = "SELECT id FROM Productos WHERE nombre = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, nombreProducto);
-                ResultSet resultSet = preparedStatement.executeQuery();
 
+                ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next())
                 {
                     idProducto = resultSet.getInt("id");
@@ -528,6 +501,90 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         return idProducto;
     }
 
+    // Obtener nombre del Producto
+    private String obtenerNombreProducto(int idProducto) {
+        String nombreProducto = null;
+
+        Connection connection = Conexion_MySQL.getConnection();
+        if (connection != null)
+        {
+            try
+            {
+                String query = "SELECT nombre FROM Productos WHERE id = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, idProducto);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next())
+                {
+                    nombreProducto = resultSet.getString("nombre");
+                }
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            } finally
+            {
+                Conexion_MySQL.cerrarConexion(connection);
+            }
+        }
+
+        return nombreProducto;
+    }
+
+    // Función para actualizar el stock de un producto en la base de datos
+    private void actualizarStockEnBaseDeDatos(int idProducto, int nuevoStock) {
+        Connection connection = Conexion_MySQL.getConnection();
+
+        if (connection != null)
+        {
+            try
+            {
+                String query = "UPDATE Productos SET stock = ? WHERE id = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, nuevoStock);
+                preparedStatement.setInt(2, idProducto);
+
+                preparedStatement.executeUpdate();
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            } finally
+            {
+                Conexion_MySQL.cerrarConexion(connection);
+            }
+        }
+    }
+
+    // Producto Seleccionado
+    private int obtenerStockProducto(int idProducto) {
+        Connection connection = Conexion_MySQL.getConnection();
+        int stock = 0;
+
+        if (connection != null)
+        {
+            try
+            {
+                String query = "SELECT stock FROM Productos WHERE id = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, idProducto);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next())
+                {
+                    stock = resultSet.getInt("stock");
+                }
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            } finally
+            {
+                Conexion_MySQL.cerrarConexion(connection);
+            }
+        }
+        return stock;
+    }
+
+    /* Mostrar productos */
     // Mostrar todos los productos en la tabla
     private void mostrarTodosLosProductos() {
         productTableModel.setRowCount(0);
@@ -634,6 +691,40 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                 Conexion_MySQL.cerrarConexion(connection);
             }
         }
+    }
+
+    // Mostrar Carrito de Compras
+    private void mostrarElementosCarrito() {
+        StringBuilder mensaje = new StringBuilder();
+        mensaje.append("Productos en el carrito:\n");
+
+        for (ProductoCarrito producto : carrito)
+        {
+            mensaje.append(producto.getCantidad()).append(" unidades de ").append(producto.getNombre()).append("\n");
+        }
+
+        JOptionPane.showMessageDialog(this, mensaje.toString(), "Carrito de Compras", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /* Mensajes */
+    // Mensaje Error
+    private void mostrarMensajeError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Mensaje Ingreso Productos
+    private String obtenerInput(String mensaje, String titulo) {
+        return JOptionPane.showInputDialog(this, mensaje, titulo, JOptionPane.PLAIN_MESSAGE);
+    }
+
+    // Mensaje Confirmacion
+    private void mostrarMensajeConfirmacion(String mensaje, String titulo) {
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    // Mensaje Informacion
+    private void mostrarMensajeInformacion(String mensaje, String titulo) {
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
 
     /* Extras */
