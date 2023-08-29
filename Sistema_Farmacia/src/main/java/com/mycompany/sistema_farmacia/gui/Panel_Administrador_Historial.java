@@ -8,6 +8,12 @@ import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
 // Librerias
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter; 
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 
 /* Clase Publica */
 public class Panel_Administrador_Historial extends javax.swing.JFrame {
@@ -92,7 +98,10 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
         jPanel_CajaTabla.setLayout(jPanel_CajaTablaLayout);
         jPanel_CajaTablaLayout.setHorizontalGroup(
             jPanel_CajaTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
+            .addGroup(jPanel_CajaTablaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
+                .addGap(31, 31, 31))
         );
         jPanel_CajaTablaLayout.setVerticalGroup(
             jPanel_CajaTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +276,56 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
     // Boton Imprimir
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
 
+        Document documento=new Document();
+        
+        try{
+            String ruta = System.getProperty("user.home");
+            String rutaCompleta = ruta + "/Desktop/mi_archivo.pdf";
+            
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/mi_archivo.pdf"));
+           
+            documento.open();
+            PdfPTable tabla=new PdfPTable(8);
+            tabla.addCell("Codigo");
+            tabla.addCell("ffffff");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            
+        try{
+            Connection cn= DriverManager.getConnection("jdbc:mysql://localhost/farmacia","root","");
+            PreparedStatement pst=cn.prepareStatement("select *from DetallesTransaccion");
+            
+            ResultSet rs=pst.executeQuery();
+            if(rs.next()){
+            
+            do{
+                
+               tabla.addCell(rs.getString(1));
+               tabla.addCell(rs.getString(2));
+               tabla.addCell(rs.getString(3));
+               tabla.addCell(rs.getString(4));
+               tabla.addCell(rs.getString(5));
+               tabla.addCell(rs.getString(6));
+               tabla.addCell(rs.getString(7));
+               tabla.addCell(rs.getString(8));
+               
+               
+            }while(rs.next());
+            documento.add(tabla);
+            
+            
+            
+            }
+        }catch(DocumentException | SQLException e){
+        }
+        documento.close();
+        JOptionPane.showMessageDialog(null, "PDF Guardado");
+        }catch(HeadlessException e){
+        }
     }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     // Boton Regresar
