@@ -31,7 +31,6 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Historial = new javax.swing.JTable();
         jPanel_CajaTodo = new javax.swing.JPanel();
-        jLabel_TitulBusqueda = new javax.swing.JLabel();
         jTextField_Busqueda = new javax.swing.JTextField();
         jButton_BuscarIDTran = new javax.swing.JButton();
         jButton_BuscarIDCajero = new javax.swing.JButton();
@@ -39,12 +38,19 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
         jButton_BuscarFecha = new javax.swing.JButton();
         jButton_BuscarProducto = new javax.swing.JButton();
         jButton_Imprimir = new javax.swing.JButton();
+        jLabel_TitulBusqueda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel_Fondo.setBackground(new java.awt.Color(225, 243, 255));
+
+        jPanel1.setBackground(new java.awt.Color(225, 243, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/historial-removebg-preview.png"))); // NOI18N
         jLabel1.setText("Historial de Transacciones");
 
+        jButton_Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Regresar-removebg-preview.png"))); // NOI18N
         jButton_Volver.setText("Volver");
         jButton_Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,8 +65,8 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(322, 322, 322)
-                .addComponent(jButton_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(310, 310, 310)
+                .addComponent(jButton_Volver))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +98,7 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
         jPanel_CajaTabla.setLayout(jPanel_CajaTablaLayout);
         jPanel_CajaTablaLayout.setHorizontalGroup(
             jPanel_CajaTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1183, Short.MAX_VALUE)
         );
         jPanel_CajaTablaLayout.setVerticalGroup(
             jPanel_CajaTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,8 +109,7 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
 
         jScrollPane_Tabla.setViewportView(jPanel_CajaTabla);
 
-        jLabel_TitulBusqueda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel_TitulBusqueda.setText("Busqueda");
+        jPanel_CajaTodo.setBackground(new java.awt.Color(225, 243, 255));
 
         jButton_BuscarIDTran.setText("ID Transacción");
         jButton_BuscarIDTran.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +146,7 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
             }
         });
 
+        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Imprimir-removebg-preview.png"))); // NOI18N
         jButton_Imprimir.setText("Imprimir");
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,30 +171,28 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
                 .addComponent(jButton_BuscarFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jButton_BuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jButton_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CajaTodoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_TitulBusqueda)
-                .addGap(529, 529, 529))
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Imprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel_CajaTodoLayout.setVerticalGroup(
             jPanel_CajaTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_CajaTodoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_TitulBusqueda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel_CajaTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton_Imprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_BuscarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_BuscarFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_BuscarIDCajero, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jButton_BuscarIDCajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_BuscarNomCajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_BuscarIDTran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField_Busqueda))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel_TitulBusqueda.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel_TitulBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/lupa-removebg-preview.png"))); // NOI18N
+        jLabel_TitulBusqueda.setText("Busqueda");
 
         javax.swing.GroupLayout jPanel_FondoLayout = new javax.swing.GroupLayout(jPanel_Fondo);
         jPanel_Fondo.setLayout(jPanel_FondoLayout);
@@ -197,18 +201,27 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
             .addGroup(jPanel_FondoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane_Tabla)
+                    .addComponent(jScrollPane_Tabla, javax.swing.GroupLayout.DEFAULT_SIZE, 1195, Short.MAX_VALUE)
                     .addGroup(jPanel_FondoLayout.createSequentialGroup()
+                        .addComponent(jPanel_CajaTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_FondoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel_CajaTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_FondoLayout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_FondoLayout.createSequentialGroup()
+                                .addComponent(jLabel_TitulBusqueda)
+                                .addGap(533, 533, 533))))))
         );
         jPanel_FondoLayout.setVerticalGroup(
             jPanel_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_FondoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_TitulBusqueda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_CajaTodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)

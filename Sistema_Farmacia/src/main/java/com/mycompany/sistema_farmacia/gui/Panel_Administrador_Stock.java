@@ -58,13 +58,24 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel_CajaGeneral.setBackground(new java.awt.Color(225, 243, 255));
+
+        jButton_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Regresar-removebg-preview.png"))); // NOI18N
         jButton_Salir.setText("Volver");
-        jButton_Salir.setActionCommand("Volver");
         jButton_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_SalirActionPerformed(evt);
             }
         });
+
+        jTabbedPane_Productos.setBackground(new java.awt.Color(205, 241, 241));
+
+        jPanel_AgregarP.setBackground(new java.awt.Color(210, 246, 255));
+
+        jPanel_CajaAgregar.setBackground(new java.awt.Color(210, 246, 255));
+
+        jPanel_CajaIngresos.setBackground(new java.awt.Color(222, 243, 255));
+        jPanel_CajaIngresos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel_NombProNu.setText("Nombre Producto:");
 
@@ -85,9 +96,8 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel_CajaIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_StockProNu, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addGroup(jPanel_CajaIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField_PrProNu, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                        .addComponent(jTextField_NomProNu)))
+                    .addComponent(jTextField_PrProNu, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jTextField_NomProNu))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel_CajaIngresosLayout.setVerticalGroup(
@@ -108,6 +118,10 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        jPanel_BtnIngresos.setBackground(new java.awt.Color(222, 243, 255));
+        jPanel_BtnIngresos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jButton_BtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/AgregarP-removebg-preview.png"))); // NOI18N
         jButton_BtnAgregar.setText("Agregar Producto");
         jButton_BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,19 +134,19 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
         jPanel_BtnIngresosLayout.setHorizontalGroup(
             jPanel_BtnIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_BtnIngresosLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jButton_BtnAgregar)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jButton_BtnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel_BtnIngresosLayout.setVerticalGroup(
             jPanel_BtnIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_BtnIngresosLayout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+            .addGroup(jPanel_BtnIngresosLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addComponent(jButton_BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jLabel_TituloAgre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_TituloAgre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_TituloAgre.setText("Agregar Productos");
 
         javax.swing.GroupLayout jPanel_CajaAgregarLayout = new javax.swing.GroupLayout(jPanel_CajaAgregar);
@@ -171,10 +185,15 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
             jPanel_AgregarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AgregarPLayout.createSequentialGroup()
                 .addComponent(jPanel_CajaAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 74, Short.MAX_VALUE))
+                .addGap(0, 72, Short.MAX_VALUE))
         );
 
         jTabbedPane_Productos.addTab("Agregar Productos", jPanel_AgregarP);
+
+        jPanel_CajaStockProductos.setBackground(new java.awt.Color(210, 246, 255));
+
+        jPanel_BtnsCrud.setBackground(new java.awt.Color(222, 243, 255));
+        jPanel_BtnsCrud.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton_ActualizarNombre.setText("Actualizar Nombre");
         jButton_ActualizarNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +216,7 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
             }
         });
 
-        jLabel_TextoparaBotones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_TextoparaBotones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_TextoparaBotones.setText("Botones de Actualización");
 
         javax.swing.GroupLayout jPanel_BtnsCrudLayout = new javax.swing.GroupLayout(jPanel_BtnsCrud);
@@ -230,6 +249,10 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel_CajaBusqueda.setBackground(new java.awt.Color(222, 243, 255));
+        jPanel_CajaBusqueda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jButton_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/lupa-removebg-preview.png"))); // NOI18N
         jButton_Buscar.setText("Buscar");
         jButton_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +260,7 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
             }
         });
 
-        jLabel_TituloBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_TituloBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_TituloBuscar.setText(" Buscar Producto por Nombre");
 
         javax.swing.GroupLayout jPanel_CajaBusquedaLayout = new javax.swing.GroupLayout(jPanel_CajaBusqueda);
@@ -249,8 +272,8 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
                     .addGroup(jPanel_CajaBusquedaLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jTextField_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_Buscar))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel_CajaBusquedaLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel_TituloBuscar)))
@@ -267,6 +290,8 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
                     .addComponent(jButton_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        jPanel_ContenedorTabla.setBackground(new java.awt.Color(210, 246, 255));
 
         jTable_Productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -288,7 +313,7 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
             .addGroup(jPanel_ContenedorTablaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel_ContenedorTablaLayout.setVerticalGroup(
             jPanel_ContenedorTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,7 +363,8 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
         jTabbedPane_Productos.addTab("Stock de Productos", jPanel);
 
-        jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel_Titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Producto-removebg-preview.png"))); // NOI18N
         jLabel_Titulo.setText("Stock de Productos");
 
         javax.swing.GroupLayout jPanel_CajaGeneralLayout = new javax.swing.GroupLayout(jPanel_CajaGeneral);
@@ -349,11 +375,9 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel_Titulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jTabbedPane_Productos))
+            .addComponent(jTabbedPane_Productos)
         );
         jPanel_CajaGeneralLayout.setVerticalGroup(
             jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
