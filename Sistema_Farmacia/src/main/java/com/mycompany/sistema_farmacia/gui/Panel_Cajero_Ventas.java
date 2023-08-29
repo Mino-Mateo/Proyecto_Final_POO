@@ -10,6 +10,12 @@ import javax.swing.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter; 
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 
 class ProductoCarrito {
 
@@ -147,6 +153,11 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         });
 
         jButton_Imprimir.setText("Imprimir");
+        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_CajaTodoLayout = new javax.swing.GroupLayout(jPanel_CajaTodo);
         jPanel_CajaTodo.setLayout(jPanel_CajaTodoLayout);
@@ -403,6 +414,61 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
             mostrarMensajeInformacion("Venta cancelada. El carrito ha sido vaciado.", "Venta Cancelada");
         }
     }//GEN-LAST:event_jButton_CancelarActionPerformed
+
+    private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
+        Document documento=new Document();
+        
+        try{
+            String ruta = System.getProperty("user.home");
+            String rutaCompleta = ruta + "/Desktop/mi_archivo.pdf";
+            
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/mi_archivo.pdf"));
+           
+            documento.open();
+            PdfPTable tabla=new PdfPTable(8);
+            tabla.addCell("Codigo");
+            tabla.addCell("ffffff");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            tabla.addCell("Codigo");
+            
+        try{
+            Connection cn= DriverManager.getConnection("jdbc:mysql://localhost/farmacia","root","");
+            PreparedStatement pst=cn.prepareStatement("select *from DetallesTransaccion");
+            
+            ResultSet rs=pst.executeQuery();
+            if(rs.next()){
+            
+            do{
+                
+               tabla.addCell(rs.getString(1));
+               tabla.addCell(rs.getString(2));
+               tabla.addCell(rs.getString(3));
+               tabla.addCell(rs.getString(4));
+               tabla.addCell(rs.getString(5));
+               tabla.addCell(rs.getString(6));
+               tabla.addCell(rs.getString(7));
+               tabla.addCell(rs.getString(8));
+               
+               
+            }while(rs.next());
+            documento.add(tabla);
+            
+            
+            
+            }
+        }catch(DocumentException | SQLException e){
+        }
+        documento.close();
+        JOptionPane.showMessageDialog(null, "PDF Guardado");
+        }catch(HeadlessException e){
+        }
+                                             
+
+    }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     // Método para agregar un producto al carrito
     private void agregarProductoAlCarrito(int idProducto, String nombre, int cantidad) {
