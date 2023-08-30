@@ -1,0 +1,124 @@
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                                    IMPORTANTE
+=======================================================================================================================================================
+A continuación, se presentarán las tablas que serán utilizadas en la Base de Datos. Estas cuentan con elementos clave para su funcionamiento,
+así como índices para optimización. Además, todo esto se ha trabajado en una Base de Datos MySQL, por lo que si estos comandos son probados 
+en otras bases, pueden generar errores.
+=======================================================================================================================================================
+A continuación, se presentan todas las tablas utilizadas en el programa.
+Si deseas modificar el código para adaptarlo a tu negocio, HAZLO
+=======================================================================================================================================================
+*/
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                        CREACIÓN DE LA BASE DE DATOS
+=======================================================================================================================================================
+Esta es la Base de Datos que se utilizará. Se recomienda no cambiar el nombre para evitar problemas en el código.
+=======================================================================================================================================================
+*/
+
+CREATE DATABASE IF NOT EXISTS Farmacia;
+USE Farmacia;
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                            BORRADO DE TABLAS
+=======================================================================================================================================================
+Si necesitas borrar las tablas para insertar nuevas columnas o en caso de algún error, utiliza los siguientes comandos.
+=======================================================================================================================================================
+*/
+
+DROP TABLE IF EXISTS Usuarios;
+DROP TABLE IF EXISTS Productos;
+DROP TABLE IF EXISTS Ventas;
+DROP TABLE IF EXISTS Transacciones;
+DROP TABLE IF EXISTS DetallesTransaccion;
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                            CREACIÓN DE TABLAS
+=======================================================================================================================================================
+Estas son las tablas que se utilizarán. Si necesitas más tablas o deseas modificar columnas, siéntete libre de hacerlo.
+=======================================================================================================================================================
+*/
+
+-- Tabla Usuarios
+CREATE TABLE Usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    contraseña VARCHAR(255) NOT NULL,
+    tipo ENUM('Administrador', 'Cajero') NOT NULL
+);
+
+-- Tabla Productos
+CREATE TABLE Productos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL
+);
+
+-- Tabla Transacciones
+CREATE TABLE Transacciones (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_cajero INT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_cajero) REFERENCES Usuarios(id)
+);
+
+-- Tabla Detalles Transaccion
+CREATE TABLE DetallesTransaccion (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_transaccion INT NOT NULL,
+    id_producto INT NOT NULL,
+    nombre_producto VARCHAR(255) NOT NULL,
+    cantidad INT NOT NULL,
+    FOREIGN KEY (id_transaccion) REFERENCES Transacciones(id),
+    FOREIGN KEY (id_producto) REFERENCES Productos(id)
+);
+
+-- Tabla Ventas
+CREATE TABLE Ventas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_cajero INT NOT NULL,
+    id_producto INT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_cajero) REFERENCES Usuarios(id),
+    FOREIGN KEY (id_producto) REFERENCES Productos(id)
+);
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                    OPTIMIZACIÓN DE BÚSQUEDAS CON ÍNDICES
+=======================================================================================================================================================
+En una base de datos, los índices actúan como atajos para encontrar información de manera más rápida y eficiente.
+Cuando realizamos búsquedas o consultas en una base de datos, los índices nos permiten acceder directamente a los datos
+relevantes en lugar de escanear todas las filas de una tabla. Esto resulta en tiempos de respuesta más cortos y un mejor
+rendimiento en general.
+
+A continuación, se presentan comandos que añaden índices a ciertas columnas en las tablas, mejorando la velocidad y
+eficiencia de las operaciones relacionadas con estas columnas.
+
+Estos índices son particularmente útiles cuando trabajamos con grandes cantidades de datos y deseamos obtener resultados
+rápidos y precisos en nuestras consultas.
+=======================================================================================================================================================
+*/
+
+-- Añadir índices a la columna "usuario" en la tabla "Usuarios"
+ALTER TABLE Usuarios ADD INDEX idx_usuario(usuario);
+
+-- Añadir índice a la columna "id_cajero" en la tabla "Transacciones"
+ALTER TABLE Transacciones ADD INDEX idx_id_cajero(id_cajero);
+
+-- Añadir índice a la columna "id_cajero" en la tabla "Ventas"
+ALTER TABLE Ventas ADD INDEX idx_id_cajero(id_cajero);
+
+-- Añadir índice a la columna "id_transaccion" en la tabla "DetallesTransaccion"
+ALTER TABLE DetallesTransaccion ADD INDEX idx_id_transaccion(id_transaccion);
+
+-- Añadir índice a la columna "id_producto" en la tabla "DetallesTransaccion"
+ALTER TABLE DetallesTransaccion ADD INDEX idx_id_producto(id_producto);

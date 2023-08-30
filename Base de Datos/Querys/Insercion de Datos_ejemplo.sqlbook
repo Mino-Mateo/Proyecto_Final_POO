@@ -1,0 +1,122 @@
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                                    IMPORTANTE
+=======================================================================================================================================================
+En los siguientes ejemplos se presenta una estructura de Base de Datos en MySQL destinada a la gestión de una farmacia. 
+Se han definido varias tablas que abarcan usuarios, productos, transacciones, detalles de transacciones y ventas. 
+Estas tablas forman un sistema básico para administrar la información relacionada con los usuarios que trabajan en la farmacia, 
+los productos disponibles, las transacciones realizadas y las ventas registradas.
+=======================================================================================================================================================
+Requisitos:
+1) Para realizar operaciones en esta Base de Datos, se requiere al menos un "INSERT" que involucre a un usuario de tipo "Administrador". 
+2) Los administradores no realizan ventas; se encargan de la Administración General de la Farmacia.
+=======================================================================================================================================================
+A continuación se presenta un ejemplo con varios elementos insertados para poder visualizar el comportamiento del sistema.
+Si deseas modificar el código para adaptarlo a tu negocio, ¡siéntete libre de hacerlo!
+=======================================================================================================================================================
+*/
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                                BORRADO DE DATOS
+=======================================================================================================================================================
+Si necesitas borrar los datos de los productos y usuarios para insertar nuevos registros o en caso de algún error, utiliza los siguientes comandos.
+=======================================================================================================================================================
+*/
+DELETE FROM Usuarios;
+DELETE FROM Productos;
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                            DATOS DE EJEMPLO PARA USUARIOS
+=======================================================================================================================================================
+Los usuarios están divididos en dos tipos: Cajeros y Administradores, cada uno con acceso a funciones y pantallas específicas.
+=======================================================================================================================================================
+*/
+
+INSERT INTO Usuarios (nombre, usuario, contraseña, tipo) VALUES
+    ('Mateo Miño', 'teo', '123', 'Administrador'),
+    ('Erick Villarroel', 'eri', '123', 'Administrador'),
+    ('Danny Yanacallo', 'dan', '123', 'Administrador'),
+    ('Bryan Delgado', 'bryd', '567', 'Cajero'),
+    ('María Torres', 'maria', '456', 'Cajero'),
+    ('Fernando Vargas', 'fer', '567', 'Cajero'),
+    ('Sofía Rojas', 'sofia', '678', 'Cajero'),
+    ('Luisa Mendoza', 'luisam', '789', 'Cajero'),
+    ('Alejandro Pérez', 'ale', '890', 'Cajero'),
+    ('Mónica Castro', 'moni', '901', 'Cajero'),
+    ('Javier Sánchez', 'javi', '345', 'Cajero'),
+    ('Ana Martínez', 'ana', '678', 'Cajero'),
+    ('Ricardo Romero', 'ricardo', '123', 'Cajero'),
+    ('Karla Gutiérrez', 'karla', '456', 'Cajero'),
+    ('Diego Herrera', 'diego', '789', 'Cajero'),
+    ('Carmen Vidal', 'carmen', '234', 'Cajero'),
+    ('Juan Paredes', 'juanp', '567', 'Cajero'),
+    ('Laura Fernández', 'laura', '890', 'Cajero'),
+    ('Pablo Soto', 'pablo', '123', 'Cajero'),
+    ('Diana Castro', 'diana', '567', 'Cajero'),
+    ('Arturo Ramírez', 'arturo', '234', 'Cajero'),
+    ('Valeria Cruz', 'valeria', '678', 'Cajero'),
+    ('Santiago Gómez', 'santiago', '890', 'Cajero'),
+    ('Elena Navarro', 'elena', '123', 'Cajero');
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                        DATOS DE EJEMPLO PARA LOS PRODUCTOS
+=======================================================================================================================================================
+Los productos se almacenan en la base de datos y son visibles en el programa. Además, solo el Administrador puede modificarlos,
+mientras que los cajeros pueden realizar ventas con estos productos.
+=======================================================================================================================================================
+*/
+
+INSERT INTO Productos (nombre, stock, precio) VALUES
+    ('Ibuprofeno', 80, 5.75),
+    ('Paracetamol', 120, 4.50),
+    ('Antiséptico', 50, 7.25),
+    ('Termómetro', 30, 9.99),
+    ('Apósitos', 100, 3.75),
+    ('Pastillas para la Garganta', 60, 6.25),
+    ('Loción para Alergias', 40, 8.50),
+    ('Vitaminas C', 90, 12.00),
+    ('Gel Antibacterial', 70, 2.99),
+    ('Cepillo de Dientes', 150, 1.50),
+    ('Pasta Dental', 100, 3.25),
+    ('Shampoo Anticaspa', 80, 7.75),
+    ('Jabón en Barra', 200, 1.00),
+    ('Toallas de Papel', 120, 2.50),
+    ('Bálsamo Labial', 50, 1.99),
+    ('Antihistamínico', 40, 6.50),
+    ('Analgésico Muscular', 60, 8.99),
+    ('Caja de Curitas', 80, 2.25),
+    ('Suplemento de Hierro', 30, 9.50),
+    ('Solución Salina', 70, 3.75),
+    ('Antidiarreico', 50, 5.25),
+    ('Cinta Adhesiva', 100, 1.75),
+    ('Algodón Médico', 120, 2.00),
+    ('Gasa Estéril', 80, 3.25),
+    ('Termómetro Digital', 60, 12.99),
+    ('Bálsamo para Labios', 40, 3.50),
+    ('Pomada para Quemaduras', 50, 6.75),
+    ('Guantes de Látex', 90, 4.25),
+    ('Vendas Elásticas', 70, 5.99),
+    ('Aceite de Ricino', 30, 7.50),
+    ('Alcohol Isopropílico', 40, 1.50),
+    ('Solución para Lentes de Contacto', 60, 4.75),
+    ('Agua Oxigenada', 50, 2.00),
+    ('Cortauñas', 100, 2.25),
+    ('Bolsas de Hielo', 80, 3.99),
+    ('Crema Hidratante', 70, 8.25),
+    ('Bálsamo para Molestias Musculares', 40, 9.50),
+    ('Desodorante en Aerosol', 50, 4.75),
+    ('Pañuelos de Papel', 60, 1.50),
+    ('Gotas para Ojos Rojos', 50, 5.25),
+    ('Tiritas de Personajes', 30, 2.75),
+    ('Mascarillas Quirúrgicas', 90, 6.99),
+    ('Laxante Suave', 70, 3.50),
+    ('Sales de Rehidratación Oral', 40, 4.75),
+    ('Antiácido', 50, 2.00),
+    ('Crema para Picaduras de Insectos', 60, 5.25),
+    ('Pastillas para Dormir', 50, 8.50),
+    ('Peine de Púas Finas', 70, 3.99),
+    ('Termómetro de Oído', 40, 16.75);

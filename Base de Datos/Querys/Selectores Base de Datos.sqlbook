@@ -1,0 +1,23 @@
+-- SQLBook: Code
+/*
+=======================================================================================================================================================
+                                                                IMPORTANTE
+=======================================================================================================================================================
+A continuación se presentarán los Select, estos se encargar de mostrar los datos completos de cada tabla.
+=======================================================================================================================================================
+*/
+-- SQLBook: Code
+-- Seleccionar todos los elementos de la tabla Usuarios
+SELECT * FROM Usuarios;
+
+-- Seleccionar todos los elementos de la tabla Productos
+SELECT * FROM Productos;
+
+-- Seleccionar todos los elementos de la tabla Transacciones
+SELECT * FROM Transacciones;
+
+-- Seleccionar todos los elementos de la tabla DetallesTransaccion
+SELECT * FROM DetallesTransaccion;
+
+-- Seleccionar todos los elementos de la tabla Ventas
+SELECT * FROM Ventas;
