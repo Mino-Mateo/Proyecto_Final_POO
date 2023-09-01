@@ -12,10 +12,8 @@ import java.sql.*;
 
 /* Clase Login */
 public class Login extends javax.swing.JFrame {
-private String nombreUsuarioActual;
 
-
-    /* Inicializador de componentes */
+    // Inicializador de componentes 
     public Login() {
         initComponents();
         configurarVentana();
@@ -63,12 +61,6 @@ private String nombreUsuarioActual;
         });
 
         jComboBox_Usuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero" }));
-
-        jTextField_Usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_UsuarioActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel_CajaLoginLayout = new javax.swing.GroupLayout(jPanel_CajaLogin);
         jPanel_CajaLogin.setLayout(jPanel_CajaLoginLayout);
@@ -164,7 +156,8 @@ private String nombreUsuarioActual;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /* Logica */
+    /* Botones */
+    // Boton Ingresar
     private void jButton_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_IngresarActionPerformed
         // Variables
         String usuario = jTextField_Usuario.getText();
@@ -190,60 +183,13 @@ private String nombreUsuarioActual;
         }
     }//GEN-LAST:event_jButton_IngresarActionPerformed
 
-    private void jTextField_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_UsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_UsuarioActionPerformed
-
-    /* Método para verificar el usuario en la base de datos */
-    private boolean verificarUsuario(String usuario, String password) {
-        try (Connection connection = Conexion_MySQL.getConnection())
-        {
-            String querySeleccionar = "SELECT * FROM Usuarios WHERE usuario = ? AND contraseña = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
-            preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, password);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery())
-            {
-                return resultSet.next();
-            }
-        } catch (SQLException e)
-        {
-            return false;
-        }
-    }
-
-    /* Método para obtener el tipo de usuario desde la base de datos */
-    private String obtenerTipoUsuario(String usuario) {
-        try (Connection connection = Conexion_MySQL.getConnection())
-        {
-            String querySeleccionar = "SELECT tipo FROM Usuarios WHERE usuario = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
-            preparedStatement.setString(1, usuario);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery())
-            {
-                if (resultSet.next())
-                {
-                    return resultSet.getString("tipo");
-                } else
-                {
-                    return null;
-                }
-            }
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     /* Funciones */
     // Abrir Pantallas del Cajero
     private void abrirPantallaCajero() {
     String nombreUsuarioActual = jTextField_Usuario.getText();
     int idUsuarioActual = obtenerIdUsuario(nombreUsuarioActual);
-    String nombreCompletoUsuario = obtenerNombreCompletoUsuario(nombreUsuarioActual);
+    String nombreCompletoUsuario = obtenerNombreUsuario(nombreUsuarioActual);
     
     Panel_Cajero_Ventas panelCajeroVentas = new Panel_Cajero_Ventas(nombreUsuarioActual, idUsuarioActual, nombreCompletoUsuario);
     panelCajeroVentas.setVisible(true);
@@ -252,11 +198,8 @@ private String nombreUsuarioActual;
 
     // Abrir Pantallas del Aministrador
     private void abrirPantallaAdministrador() {
-        // Abrir la pantalla Panel_Administrador_Opciones
         Panel_Administrador_Opciones panelAdminOpciones = new Panel_Administrador_Opciones();
         panelAdminOpciones.setVisible(true);
-
-        // Cierra la pantalla de Login
         this.dispose();
     }
 
@@ -291,46 +234,89 @@ private String nombreUsuarioActual;
         setResizable(false);
     }
     
-    // Método para obtener el ID del usuario desde la base de datos
-private int obtenerIdUsuario(String usuario) {
-    try (Connection connection = Conexion_MySQL.getConnection()) {
-        String querySeleccionarId = "SELECT id FROM Usuarios WHERE usuario = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionarId);
-        preparedStatement.setString(1, usuario);
+    // Obtener ID
+    private int obtenerIdUsuario(String usuario) {
+        try (Connection connection = Conexion_MySQL.getConnection()) {
+            String querySeleccionarId = "SELECT id FROM Usuarios WHERE usuario = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionarId);
+            preparedStatement.setString(1, usuario);
 
-        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-            if (resultSet.next()) {
-                return resultSet.getInt("id");
-            } else {
-                return -1;
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("id");
+                } else {
+                    return -1;
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return -1;
     }
-}
 
-private String obtenerNombreCompletoUsuario(String usuario) {
-    try (Connection connection = Conexion_MySQL.getConnection()) {
-        String querySeleccionarNombre = "SELECT nombre FROM Usuarios WHERE usuario = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionarNombre);
-        preparedStatement.setString(1, usuario);
+    // Obtener Nombre Usuario
+    private String obtenerNombreUsuario(String usuario) {
+        try (Connection connection = Conexion_MySQL.getConnection()) {
+            String querySeleccionarNombre = "SELECT nombre FROM Usuarios WHERE usuario = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionarNombre);
+            preparedStatement.setString(1, usuario);
 
-        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-            if (resultSet.next()) {
-                return resultSet.getString("nombre");
-            } else {
-                return "Nombre no encontrado";
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("nombre");
+                } else {
+                    return "Nombre no encontrado";
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Error al obtener el nombre";
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return "Error al obtener el nombre";
     }
-}
+    
+    // Verificar Usuario
+    private boolean verificarUsuario(String usuario, String password) {
+        try (Connection connection = Conexion_MySQL.getConnection())
+        {
+            String querySeleccionar = "SELECT * FROM Usuarios WHERE usuario = ? AND contraseña = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
+            preparedStatement.setString(1, usuario);
+            preparedStatement.setString(2, password);
 
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                return resultSet.next();
+            }
+        } catch (SQLException e)
+        {
+            return false;
+        }
+    }
 
+    // Tipo Usuario
+    private String obtenerTipoUsuario(String usuario) {
+        try (Connection connection = Conexion_MySQL.getConnection())
+        {
+            String querySeleccionar = "SELECT tipo FROM Usuarios WHERE usuario = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
+            preparedStatement.setString(1, usuario);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                if (resultSet.next())
+                {
+                    return resultSet.getString("tipo");
+                } else
+                {
+                    return null;
+                }
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Ingresar;

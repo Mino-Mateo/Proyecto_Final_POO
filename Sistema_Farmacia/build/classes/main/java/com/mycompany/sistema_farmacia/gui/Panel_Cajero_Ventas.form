@@ -186,11 +186,9 @@
                               <Component id="jButton_Confirmar" min="-2" pref="116" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Component id="jButton_Cancelar" min="-2" pref="90" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="jButton_Imprimir" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="167" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -210,9 +208,8 @@
                           <Component id="jButton_Agregar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="jButton_Confirmar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="jButton_Cancelar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="jButton_Imprimir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -280,17 +277,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_CancelarActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton_Imprimir">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/main/java/com/mycompany/sistema_farmacia/Imagenes/Imprimir-removebg-preview.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Imprimir"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_ImprimirActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

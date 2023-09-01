@@ -84,7 +84,6 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         jButton_Agregar = new javax.swing.JButton();
         jButton_Confirmar = new javax.swing.JButton();
         jButton_Cancelar = new javax.swing.JButton();
-        jButton_Imprimir = new javax.swing.JButton();
         jScrollPane_Productos = new javax.swing.JScrollPane();
         jPanel_CajaTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -183,14 +182,6 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
             }
         });
 
-        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Imprimir-removebg-preview.png"))); // NOI18N
-        jButton_Imprimir.setText("Imprimir");
-        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_ImprimirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel_CajaTodoLayout = new javax.swing.GroupLayout(jPanel_CajaTodo);
         jPanel_CajaTodo.setLayout(jPanel_CajaTodoLayout);
         jPanel_CajaTodoLayout.setHorizontalGroup(
@@ -218,10 +209,8 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jButton_Confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jButton_Imprimir)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         jPanel_CajaTodoLayout.setVerticalGroup(
             jPanel_CajaTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,9 +226,8 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                     .addComponent(jButton_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Imprimir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jTable_Productos.setModel(new javax.swing.table.DefaultTableModel(
@@ -517,26 +505,6 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
             mostrarMensajeInformacion("Venta cancelada. El carrito ha sido vaciado.", "Venta Cancelada");
         }
     }//GEN-LAST:event_jButton_CancelarActionPerformed
-
-    private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
-         String ruta = System.getProperty("user.home");
-        String rutaCompleta = ruta + "/Desktop/mi_archivo.pdf"; 
-        Document documento=new Document();
-        
-        
-        try{
-         PdfWriter.getInstance(documento, new FileOutputStream(rutaCompleta));
-
-              documento.open();
-                PdfPTable tabla=new PdfPTable(8);
-                tabla.addCell("Hola soy judio");
-
-        }catch(DocumentException ev){
-             JOptionPane.showMessageDialog(null, "No se pudo crear PDF");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Panel_Administrador_Historial.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     // Método para agregar un producto al carrito
     private void agregarProductoAlCarrito(int idProducto, String nombre, int cantidad) {
@@ -883,7 +851,6 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Cancelar;
     private javax.swing.JButton jButton_Confirmar;
     private javax.swing.JButton jButton_ID;
-    private javax.swing.JButton jButton_Imprimir;
     private javax.swing.JButton jButton_Nombre;
     private javax.swing.JButton jButton_Volver;
     private javax.swing.JLabel jLabel1;
