@@ -895,9 +895,6 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
     private void configurarVentana() {
         // Centrar la ventana en el escritorio
         setLocationRelativeTo(null);
-
-        // Evitar que la ventana pueda ser redimensionada
-        setResizable(false);
     }
 
     // Volver al Login
