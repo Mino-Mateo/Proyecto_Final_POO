@@ -185,6 +185,7 @@ public class Login extends javax.swing.JFrame {
 
 
     /* Funciones */
+    /* Otras Pantallas */
     // Abrir Pantallas del Cajero
     private void abrirPantallaCajero() {
     String nombreUsuarioActual = jTextField_Usuario.getText();
@@ -203,6 +204,7 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }
 
+    /* Logica Botones */
     // Funcion Comprobacion
     private boolean comprobacionUsuario(String usuario, String password, String tipoUsuarioSeleccionado) {
         String tipoUsuario = obtenerTipoUsuario(usuario);
@@ -219,21 +221,7 @@ public class Login extends javax.swing.JFrame {
 
         return verificarUsuario(usuario, password);
     }
-
-    // Mensaje de error
-    private void mostrarMensajeError() {
-        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de ingreso", JOptionPane.ERROR_MESSAGE);
-    }
-
-    // Configurar las pantallas
-    private void configurarVentana() {
-        // Centrar la ventana en el escritorio
-        setLocationRelativeTo(null);
-
-        // Evitar que la ventana pueda ser redimensionada
-        setResizable(false);
-    }
-    
+        
     // Obtener ID
     private int obtenerIdUsuario(String usuario) {
         try (Connection connection = Conexion_MySQL.getConnection()) {
@@ -317,6 +305,23 @@ public class Login extends javax.swing.JFrame {
             return null;
         }
     }
+
+    /* Mensajes */
+    // Mensaje de error
+    private void mostrarMensajeError() {
+        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de ingreso", JOptionPane.ERROR_MESSAGE);
+    }
+
+    /* Extras */
+    // Configurar las pantallas
+    private void configurarVentana() {
+        // Centrar la ventana en el escritorio
+        setLocationRelativeTo(null);
+
+        // Evitar que la ventana pueda ser redimensionada
+        setResizable(false);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Ingresar;
