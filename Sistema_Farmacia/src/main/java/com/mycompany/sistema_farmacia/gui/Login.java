@@ -9,8 +9,11 @@ import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
 import javax.swing.*;
 import java.sql.*;
 
+
 /* Clase Login */
 public class Login extends javax.swing.JFrame {
+private String nombreUsuarioActual;
+
 
     /* Inicializador de componentes */
     public Login() {
@@ -37,7 +40,6 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel_CajaGeneral.setBackground(new java.awt.Color(225, 243, 255));
-        jPanel_CajaGeneral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel_CajaLogin.setBackground(new java.awt.Color(204, 255, 255));
         jPanel_CajaLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 255, 255), 3));
@@ -61,6 +63,12 @@ public class Login extends javax.swing.JFrame {
         });
 
         jComboBox_Usuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero" }));
+
+        jTextField_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_UsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_CajaLoginLayout = new javax.swing.GroupLayout(jPanel_CajaLogin);
         jPanel_CajaLogin.setLayout(jPanel_CajaLoginLayout);
@@ -110,16 +118,35 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        jPanel_CajaGeneral.add(jPanel_CajaLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
-
         jLabel_Titulo.setBackground(new java.awt.Color(204, 255, 255));
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/8220922-removebg-preview.png"))); // NOI18N
         jLabel_Titulo.setText("FARMACIAS SU SALUD");
-        jPanel_CajaGeneral.add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 344, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/fondo.jpg"))); // NOI18N
-        jPanel_CajaGeneral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 89));
+
+        javax.swing.GroupLayout jPanel_CajaGeneralLayout = new javax.swing.GroupLayout(jPanel_CajaGeneral);
+        jPanel_CajaGeneral.setLayout(jPanel_CajaGeneralLayout);
+        jPanel_CajaGeneralLayout.setHorizontalGroup(
+            jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1)
+            .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jPanel_CajaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel_CajaGeneralLayout.setVerticalGroup(
+            jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel_Titulo)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel_CajaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,7 +158,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -162,6 +189,10 @@ public class Login extends javax.swing.JFrame {
             mostrarMensajeError();
         }
     }//GEN-LAST:event_jButton_IngresarActionPerformed
+
+    private void jTextField_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_UsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_UsuarioActionPerformed
 
     /* Método para verificar el usuario en la base de datos */
     private boolean verificarUsuario(String usuario, String password) {
@@ -210,12 +241,13 @@ public class Login extends javax.swing.JFrame {
     /* Funciones */
     // Abrir Pantallas del Cajero
     private void abrirPantallaCajero() {
-        // Abrir la pantalla Panel_Cajero_Ventas
-        Panel_Cajero_Ventas panelCajeroVentas = new Panel_Cajero_Ventas();
-        panelCajeroVentas.setVisible(true);
-
-        // Cierra la pantalla de Login
-        this.dispose();
+    String nombreUsuarioActual = jTextField_Usuario.getText();
+    int idUsuarioActual = obtenerIdUsuario(nombreUsuarioActual);
+    String nombreCompletoUsuario = obtenerNombreCompletoUsuario(nombreUsuarioActual);
+    
+    Panel_Cajero_Ventas panelCajeroVentas = new Panel_Cajero_Ventas(nombreUsuarioActual, idUsuarioActual, nombreCompletoUsuario);
+    panelCajeroVentas.setVisible(true);
+    this.dispose();
     }
 
     // Abrir Pantallas del Aministrador
@@ -258,6 +290,47 @@ public class Login extends javax.swing.JFrame {
         // Evitar que la ventana pueda ser redimensionada
         setResizable(false);
     }
+    
+    // Método para obtener el ID del usuario desde la base de datos
+private int obtenerIdUsuario(String usuario) {
+    try (Connection connection = Conexion_MySQL.getConnection()) {
+        String querySeleccionarId = "SELECT id FROM Usuarios WHERE usuario = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionarId);
+        preparedStatement.setString(1, usuario);
+
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            } else {
+                return -1;
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return -1;
+    }
+}
+
+private String obtenerNombreCompletoUsuario(String usuario) {
+    try (Connection connection = Conexion_MySQL.getConnection()) {
+        String querySeleccionarNombre = "SELECT nombre FROM Usuarios WHERE usuario = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionarNombre);
+        preparedStatement.setString(1, usuario);
+
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getString("nombre");
+            } else {
+                return "Nombre no encontrado";
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return "Error al obtener el nombre";
+    }
+}
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Ingresar;

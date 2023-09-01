@@ -45,14 +45,22 @@ class ProductoCarrito {
 
 /* Clase Panel_Cajero_Ventas*/
 public class Panel_Cajero_Ventas extends javax.swing.JFrame {
-
+    private String nombreUsuario;
+    private int idUsuario;
     private ArrayList<ProductoCarrito> carrito = new ArrayList<>();
     private DefaultTableModel productTableModel;
+    private String nombreCompletoUsuario;
 
-    public Panel_Cajero_Ventas() {
+    public Panel_Cajero_Ventas(String nombreUsuario, int idUsuario, String nombreCompletoUsuario) {
         initComponents();
         configurarVentana();
+        this.nombreUsuario = nombreUsuario;
+        this.idUsuario = idUsuario;
+        this.nombreCompletoUsuario = nombreCompletoUsuario;
         productTableModel = (DefaultTableModel) jTable_Productos.getModel();
+        Label_Nombre_Cajero.setText("Usuario: " + nombreUsuario);
+        Label_id_Cajero.setText("ID: " + idUsuario);
+        Label_NombreUsuario_Cajero.setText("Nombre: " + nombreCompletoUsuario);
         mostrarTodosLosProductos();
     }
 
@@ -78,8 +86,20 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         jPanel_CajaTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Productos = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        Label_Nombre_Cajero = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Label_id_Cajero = new javax.swing.JLabel();
+        Label_NombreUsuario_Cajero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(225, 243, 255));
+
+        jPanel_CajaGeneral.setBackground(new java.awt.Color(225, 243, 255));
+
+        jPanel1.setBackground(new java.awt.Color(225, 243, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Venta de Productos");
@@ -111,6 +131,8 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel_CajaTodo.setBackground(new java.awt.Color(225, 243, 255));
 
         jLabel_TituloBuscarBotones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel_TituloBuscarBotones.setText("Botones Busqueda");
@@ -154,11 +176,6 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         });
 
         jButton_Imprimir.setText("Imprimir");
-        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_ImprimirActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel_CajaTodoLayout = new javax.swing.GroupLayout(jPanel_CajaTodo);
         jPanel_CajaTodo.setLayout(jPanel_CajaTodoLayout);
@@ -170,7 +187,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(jTextField_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton_ID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_ID, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                         .addGap(10, 10, 10)
                         .addComponent(jButton_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
@@ -190,7 +207,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                     .addGroup(jPanel_CajaTodoLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jLabel_TituloInteraccionBotones)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 47, Short.MAX_VALUE))
         );
         jPanel_CajaTodoLayout.setVerticalGroup(
             jPanel_CajaTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +247,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
             jPanel_CajaTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_CajaTablaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel_CajaTablaLayout.setVerticalGroup(
@@ -252,7 +269,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                 .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel_CajaTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane_Productos))
+                    .addComponent(jScrollPane_Productos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel_CajaGeneralLayout.setVerticalGroup(
@@ -263,19 +280,90 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_CajaTodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane_Productos, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .addComponent(jScrollPane_Productos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jPanel2.setBackground(new java.awt.Color(193, 225, 255));
+
+        Label_Nombre_Cajero.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
+        Label_Nombre_Cajero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Label_Nombre_Cajero.setText("------------");
+        Label_Nombre_Cajero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Label_Nombre_Cajero.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jLabel2.setText("CAJERO");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/CajeroIcon-removebg-preview.png"))); // NOI18N
+
+        Label_id_Cajero.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
+        Label_id_Cajero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Label_id_Cajero.setText("-------------");
+
+        Label_NombreUsuario_Cajero.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
+        Label_NombreUsuario_Cajero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Label_NombreUsuario_Cajero.setText("-------------");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Label_Nombre_Cajero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addComponent(jLabel2)))
+                        .addGap(0, 72, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Label_id_Cajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Label_NombreUsuario_Cajero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(Label_NombreUsuario_Cajero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Label_Nombre_Cajero, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Label_id_Cajero, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -814,6 +902,9 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Label_NombreUsuario_Cajero;
+    private javax.swing.JLabel Label_Nombre_Cajero;
+    private javax.swing.JLabel Label_id_Cajero;
     private javax.swing.JButton jButton_Agregar;
     private javax.swing.JButton jButton_Cancelar;
     private javax.swing.JButton jButton_Confirmar;
@@ -822,9 +913,13 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Nombre;
     private javax.swing.JButton jButton_Volver;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_TituloBuscarBotones;
     private javax.swing.JLabel jLabel_TituloInteraccionBotones;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_CajaGeneral;
     private javax.swing.JPanel jPanel_CajaTabla;
     private javax.swing.JPanel jPanel_CajaTodo;
