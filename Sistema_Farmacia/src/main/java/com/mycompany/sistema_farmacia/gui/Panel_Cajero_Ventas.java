@@ -101,10 +101,13 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(225, 243, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Ventas-removebg-preview.png"))); // NOI18N
         jLabel1.setText("Venta de Productos");
 
-        jButton_Volver.setText("Salir");
+        jButton_Volver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton_Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/salir-removebg-preview.png"))); // NOI18N
+        jButton_Volver.setText("SALIR");
         jButton_Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_VolverActionPerformed(evt);
@@ -118,15 +121,15 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(216, 216, 216)
-                .addComponent(jButton_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163)
+                .addComponent(jButton_Volver)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -135,6 +138,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         jPanel_CajaTodo.setBackground(new java.awt.Color(225, 243, 255));
 
         jLabel_TituloBuscarBotones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_TituloBuscarBotones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/lupa-removebg-preview.png"))); // NOI18N
         jLabel_TituloBuscarBotones.setText("Botones Busqueda");
 
         jButton_ID.setText("ID");
@@ -152,6 +156,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
         });
 
         jLabel_TituloInteraccionBotones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_TituloInteraccionBotones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/interacciones-removebg-preview.png"))); // NOI18N
         jLabel_TituloInteraccionBotones.setText("Botones Interacciones");
 
         jButton_Agregar.setText("Agregar");
@@ -175,6 +180,7 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
             }
         });
 
+        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Imprimir-removebg-preview.png"))); // NOI18N
         jButton_Imprimir.setText("Imprimir");
 
         javax.swing.GroupLayout jPanel_CajaTodoLayout = new javax.swing.GroupLayout(jPanel_CajaTodo);
@@ -197,17 +203,17 @@ public class Panel_Cajero_Ventas extends javax.swing.JFrame {
                         .addGap(39, 39, 39)))
                 .addGroup(jPanel_CajaTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_CajaTodoLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel_TituloInteraccionBotones))
+                    .addGroup(jPanel_CajaTodoLayout.createSequentialGroup()
                         .addComponent(jButton_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jButton_Confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_CajaTodoLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLabel_TituloInteraccionBotones)))
-                .addGap(11, 47, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(jButton_Imprimir)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_CajaTodoLayout.setVerticalGroup(
             jPanel_CajaTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
