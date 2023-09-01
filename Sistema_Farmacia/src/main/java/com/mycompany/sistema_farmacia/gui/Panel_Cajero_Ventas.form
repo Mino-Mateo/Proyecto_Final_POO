@@ -210,7 +210,7 @@
                           <Component id="jButton_Agregar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="jButton_Confirmar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="jButton_Cancelar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="jButton_Imprimir" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="jButton_Imprimir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
