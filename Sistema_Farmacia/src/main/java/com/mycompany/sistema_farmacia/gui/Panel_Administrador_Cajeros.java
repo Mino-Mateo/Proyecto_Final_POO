@@ -23,8 +23,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel_CajaGeneral = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel_Titulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel_Nombre = new javax.swing.JLabel();
         jLabel_Usuario = new javax.swing.JLabel();
@@ -36,6 +35,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel_NuevaPassword = new javax.swing.JLabel();
         jPasswordField_Nueva = new javax.swing.JPasswordField();
+        jLabel_Titulo = new javax.swing.JLabel();
         jPanel_Volver = new javax.swing.JPanel();
         jButton_Volver = new javax.swing.JButton();
         jPanel_CajaBotones = new javax.swing.JPanel();
@@ -44,38 +44,12 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jButton_Borrar = new javax.swing.JButton();
         jButton_ActualizarPassword = new javax.swing.JButton();
         jButton_ActualizarTipo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel_CajaGeneral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_CajaGeneral.setBackground(new java.awt.Color(222, 242, 243));
 
-        jPanel2.setBackground(new java.awt.Color(210, 252, 252));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)));
-
-        jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel_Titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Cliente-removebg-preview.png"))); // NOI18N
-        jLabel_Titulo.setText("Manejo de Usuarios");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_Titulo)
-                .addGap(16, 16, 16))
-        );
-
-        jPanel_CajaGeneral.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 300, 50));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/fondo.jpg"))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(225, 243, 255));
 
@@ -96,31 +70,40 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jLabel_NuevaPassword.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_NuevaPassword.setText("Nueva Contraseña:");
 
+        jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel_Titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Cliente-removebg-preview.png"))); // NOI18N
+        jLabel_Titulo.setText("Manejo de Usuarios");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel_NuevaPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Nombre)
-                    .addComponent(jLabel_Usuario)
-                    .addComponent(jLabel_Tipo)
-                    .addComponent(jLabel_Contraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_Nombre)
-                    .addComponent(jTextField_Usuario)
-                    .addComponent(jPasswordField)
-                    .addComponent(jComboBox1, 0, 111, Short.MAX_VALUE)
-                    .addComponent(jPasswordField_Nueva))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel_NuevaPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel_Nombre)
+                            .addComponent(jLabel_Usuario)
+                            .addComponent(jLabel_Tipo)
+                            .addComponent(jLabel_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_Nombre)
+                            .addComponent(jTextField_Usuario)
+                            .addComponent(jPasswordField)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPasswordField_Nueva, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel_Titulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Nombre)
                     .addComponent(jTextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,10 +123,10 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Tipo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
         );
 
-        jPanel_CajaGeneral.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, 424));
+        jPanel_Volver.setBackground(new java.awt.Color(222, 242, 243));
 
         jButton_Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/Regresar-removebg-preview.png"))); // NOI18N
         jButton_Volver.setText("Volver");
@@ -168,8 +151,6 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jPanel_CajaGeneral.add(jPanel_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 16, 140, 40));
 
         jPanel_CajaBotones.setBackground(new java.awt.Color(222, 242, 243));
 
@@ -230,7 +211,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jPanel_CajaBotonesLayout.setVerticalGroup(
             jPanel_CajaBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CajaBotonesLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap(52, Short.MAX_VALUE)
                 .addComponent(jButton_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton_ActualizarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,25 +220,50 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton_Borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(jButton_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel_CajaGeneral.add(jPanel_CajaBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/fondo.jpg"))); // NOI18N
-        jPanel_CajaGeneral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, -1));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/mycompany/sistema_farmacia/Imagenes/fondo22.jpg"))); // NOI18N
-        jPanel_CajaGeneral.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 280, 530));
+        javax.swing.GroupLayout jPanel_CajaGeneralLayout = new javax.swing.GroupLayout(jPanel_CajaGeneral);
+        jPanel_CajaGeneral.setLayout(jPanel_CajaGeneralLayout);
+        jPanel_CajaGeneralLayout.setHorizontalGroup(
+            jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jPanel_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel_CajaBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6))
+        );
+        jPanel_CajaGeneralLayout.setVerticalGroup(
+            jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                .addGroup(jPanel_CajaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jPanel_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jPanel_CajaBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel_CajaGeneralLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel_CajaGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,7 +570,6 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Volver;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel_Contraseña;
     private javax.swing.JLabel jLabel_Nombre;
     private javax.swing.JLabel jLabel_NuevaPassword;
@@ -572,7 +577,6 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Titulo;
     private javax.swing.JLabel jLabel_Usuario;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_CajaBotones;
     private javax.swing.JPanel jPanel_CajaGeneral;
     private javax.swing.JPanel jPanel_Volver;
