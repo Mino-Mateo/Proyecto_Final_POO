@@ -13,7 +13,12 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter; 
 import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import sun.jvm.hotspot.debugger.Page;
 
 /* Clase Publica */
 public class Panel_Administrador_Historial extends javax.swing.JFrame {
@@ -288,56 +293,22 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
 
     // Boton Imprimir
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
-
+        String ruta = System.getProperty("user.home");
+        String rutaCompleta = ruta + "/Desktop/mi_archivo.pdf"; 
         Document documento=new Document();
         
+        
         try{
-            String ruta = System.getProperty("user.home");
-            String rutaCompleta = ruta + "/Desktop/mi_archivo.pdf";
-            
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/mi_archivo.pdf"));
-           
-            documento.open();
-            PdfPTable tabla=new PdfPTable(8);
-            tabla.addCell("Codigo");
-            tabla.addCell("ffffff");
-            tabla.addCell("Codigo");
-            tabla.addCell("Codigo");
-            tabla.addCell("Codigo");
-            tabla.addCell("Codigo");
-            tabla.addCell("Codigo");
-            tabla.addCell("Codigo");
-            
-        try{
-            Connection cn= DriverManager.getConnection("jdbc:mysql://localhost/farmacia","root","");
-            PreparedStatement pst=cn.prepareStatement("select *from DetallesTransaccion");
-            
-            ResultSet rs=pst.executeQuery();
-            if(rs.next()){
-            
-            do{
-                
-               tabla.addCell(rs.getString(1));
-               tabla.addCell(rs.getString(2));
-               tabla.addCell(rs.getString(3));
-               tabla.addCell(rs.getString(4));
-               tabla.addCell(rs.getString(5));
-               tabla.addCell(rs.getString(6));
-               tabla.addCell(rs.getString(7));
-               tabla.addCell(rs.getString(8));
-               
-               
-            }while(rs.next());
-            documento.add(tabla);
-            
-            
-            
-            }
-        }catch(DocumentException | SQLException e){
-        }
-        documento.close();
-        JOptionPane.showMessageDialog(null, "PDF Guardado");
-        }catch(HeadlessException e){
+         PdfWriter.getInstance(documento, new FileOutputStream(rutaCompleta));
+
+              documento.open();
+                PdfPTable tabla=new PdfPTable(8);
+                tabla.addCell("Hola soy judio");
+
+        }catch(DocumentException ev){
+             JOptionPane.showMessageDialog(null, "No se pudo crear PDF");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Panel_Administrador_Historial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
