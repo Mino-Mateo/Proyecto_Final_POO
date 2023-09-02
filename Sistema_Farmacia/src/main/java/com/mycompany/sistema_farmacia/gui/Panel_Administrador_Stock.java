@@ -837,9 +837,6 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
         // Centrar la ventana en el escritorio
         setLocationRelativeTo(null);
-
-        // Evitar que la ventana pueda ser redimensionada
-        setResizable(false);
     }
 
     // Limpiar Pantalla
