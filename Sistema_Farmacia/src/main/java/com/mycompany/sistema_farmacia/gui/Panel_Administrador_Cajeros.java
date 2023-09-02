@@ -12,12 +12,13 @@ import javax.swing.*;
 /* Clase Panel Usuarios Administrador */
 public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
-    /* Inicializador */
+    // Inicializador
     public Panel_Administrador_Cajeros() {
         initComponents();
         configurarVentana();
     }
 
+    // Componentes Graficos
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,7 +28,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel_Nombre = new javax.swing.JLabel();
         jLabel_Usuario = new javax.swing.JLabel();
-        jLabel_Contraseña = new javax.swing.JLabel();
+        jLabel_Password = new javax.swing.JLabel();
         jLabel_Tipo = new javax.swing.JLabel();
         jTextField_Nombre = new javax.swing.JTextField();
         jTextField_Usuario = new javax.swing.JTextField();
@@ -59,8 +60,8 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         jLabel_Usuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_Usuario.setText("Usuario:");
 
-        jLabel_Contraseña.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel_Contraseña.setText("Contraseña:");
+        jLabel_Password.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel_Password.setText("Contraseña:");
 
         jLabel_Tipo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_Tipo.setText("Tipo:");
@@ -88,7 +89,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                             .addComponent(jLabel_Nombre)
                             .addComponent(jLabel_Usuario)
                             .addComponent(jLabel_Tipo)
-                            .addComponent(jLabel_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField_Nombre)
@@ -113,7 +114,7 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
                     .addComponent(jTextField_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Contraseña)
+                    .addComponent(jLabel_Password)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,9 +274,10 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /* Botones */
     // Boton Regresar
     private void jButton_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VolverActionPerformed
-        manejoPantalla(new Panel_Administrador_Opciones());
+        regresarPantalla(new Panel_Administrador_Opciones());
     }//GEN-LAST:event_jButton_VolverActionPerformed
 
     // Boton Actualizar Tipo
@@ -290,9 +292,12 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
     // Boton Borrar
     private void jButton_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BorrarActionPerformed
+
+        // Variables
         String usuario = jTextField_Usuario.getText();
         char[] passwordChars = jPasswordField.getPassword();
 
+        // Logica
         if (!usuario.isEmpty() && passwordChars.length > 0)
         {
             String contraseña = new String(passwordChars);
@@ -306,10 +311,14 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
     // Boton Agregar
     private void jButton_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarActionPerformed
+
+        // Variables
         String nombre = jTextField_Nombre.getText();
         String usuario = jTextField_Usuario.getText();
         String contraseña = new String(jPasswordField.getPassword());
         String tipo = (String) jComboBox1.getSelectedItem();
+
+        // Logica
         agregarUsuario(nombre, usuario, contraseña, tipo);
     }//GEN-LAST:event_jButton_AgregarActionPerformed
 
@@ -319,50 +328,32 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
     /* Funciones */
-    // Manejo de Pantalla
-    private void manejoPantalla(javax.swing.JFrame nuevaPantalla) {
-        dispose();
-        nuevaPantalla.setVisible(true);
-    }
+    // Actualizar Tipo
+    private void actualizarTipo() {
 
-    // Limpiar Pantalla
-    private void limpiarPantalla() {
-        jTextField_Nombre.setText("");
-        jTextField_Usuario.setText("");
-        jPasswordField.setText("");
-        jPasswordField_Nueva.setText("");
-        jComboBox1.setSelectedIndex(0);
-    }
+        // Variables
+        String usuario = jTextField_Usuario.getText();
+        String nuevoTipo = (String) jComboBox1.getSelectedItem();
 
-    // Agregar Usuarios
-    private void agregarUsuario(String nombre, String usuario, String contraseña, String tipo) {
-        if (nombre.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || tipo.isEmpty())
+        // Query
+        String QUERY_UPDATE_TIPO = "UPDATE Usuarios SET tipo = ? WHERE usuario = ?";
+
+        // Logica
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_UPDATE_TIPO))
         {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
-        String QUERY_INSERT_CAJERO = "INSERT INTO Usuarios (nombre, usuario, contraseña, tipo) VALUES (?, ?, ?, ?)";
+            pstmt.setString(1, nuevoTipo);
+            pstmt.setString(2, usuario);
 
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_INSERT_CAJERO))
-        {
-            cone.setString(1, nombre);
-            cone.setString(2, usuario);
-            cone.setString(3, contraseña);
-            cone.setString(4, tipo);
-
-            int rowsAffected = cone.executeUpdate();
+            int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0)
             {
-                JOptionPane.showMessageDialog(this, "Usuario agregado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Tipo de usuario actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             } else
             {
-                JOptionPane.showMessageDialog(this, "Error al ingresar, este usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se encontró el usuario", "Error", JOptionPane.ERROR_MESSAGE);
             }
             limpiarPantalla();
-        } catch (SQLIntegrityConstraintViolationException duplicateKeyException)
-        {
-            JOptionPane.showMessageDialog(this, "Error al ingresar, este usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex)
         {
             throw new RuntimeException(ex);
@@ -371,13 +362,17 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
 
     // Actualizar Contraseña
     private void actualizarPassword() {
+
+        // Variables
         String usuario = jTextField_Usuario.getText();
         String nuevaContraseña = new String(jPasswordField_Nueva.getPassword());
 
         if (!nuevaContraseña.isEmpty())
         {
+            // Query
             String QUERY_UPDATE_CONTRASEÑA = "UPDATE Usuarios SET contraseña = ? WHERE usuario = ?";
 
+            // Logica
             try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_UPDATE_CONTRASEÑA))
             {
                 cone.setString(1, nuevaContraseña);
@@ -402,61 +397,58 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         }
     }
 
-    // Actualizar Tipo
-    private void actualizarTipo() {
-        String usuario = jTextField_Usuario.getText();
-        String nuevoTipo = (String) jComboBox1.getSelectedItem();
+    // Verificar Contraseña
+    private boolean verificarPassword(String usuario, String password) {
 
-        String QUERY_UPDATE_TIPO = "UPDATE Usuarios SET tipo = ? WHERE usuario = ?";
+        // Query
+        String QUERY_VERIFICAR_CONTRASEÑA = "SELECT COUNT(*) FROM Usuarios WHERE usuario = ? AND contraseña = ?";
 
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_UPDATE_TIPO))
+        // Logica
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_VERIFICAR_CONTRASEÑA))
         {
+            cone.setString(1, usuario);
+            cone.setString(2, password);
 
-            pstmt.setString(1, nuevoTipo);
-            pstmt.setString(2, usuario);
-
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0)
+            try (ResultSet rs = cone.executeQuery())
             {
-                JOptionPane.showMessageDialog(this, "Tipo de usuario actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            } else
-            {
-                JOptionPane.showMessageDialog(this, "No se encontró el usuario", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            limpiarPantalla();
-        } catch (SQLException ex)
-        {
-            throw new RuntimeException(ex);
-        }
-    }
-
-    // Buscar Usuario
-    private int buscarUsuario(String textoUsuario) {
-        String QUERY_OBTENER_ID = "SELECT id FROM Usuarios WHERE usuario = ?";
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement pstmt = conn.prepareStatement(QUERY_OBTENER_ID))
-        {
-            pstmt.setString(1, textoUsuario);
-            try (ResultSet rs = pstmt.executeQuery())
-            {
-                if (rs.next())
-                {
-                    return rs.getInt("id");
-                }
+                return rs.next() && rs.getInt(1) > 0;
             }
         } catch (SQLException x)
         {
             throw new RuntimeException(x);
         }
-        return -1;
+    }
+
+    // Ventas Asociadas
+    private boolean ventasAsociadas(int idUsuario) {
+
+        // Query
+        String QUERY_VERIFICAR_VENTAS = "SELECT COUNT(*) FROM ventas WHERE id_cajero = ?";
+
+        // Logica
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_VERIFICAR_VENTAS))
+        {
+            cone.setInt(1, idUsuario);
+            try (ResultSet rs = cone.executeQuery())
+            {
+                return rs.next() && rs.getInt(1) > 0;
+            }
+        } catch (SQLException x)
+        {
+            throw new RuntimeException(x);
+        }
     }
 
     // Borrar Transacciones y Ventas Asociadas
     private void borrarAsociados(int idUsuario) {
+
+        // Query
         String DELETE_DETALLES = "DELETE FROM detallestransaccion WHERE id_transaccion IN (SELECT id FROM Transacciones WHERE id_cajero = ?)";
         String DELETE_TRANSACCIONES = "DELETE FROM Transacciones WHERE id_cajero = ?";
         String DELETE_VENTAS = "DELETE FROM ventas WHERE id_cajero = ?";
         String DELETE_USUARIO = "DELETE FROM Usuarios WHERE id = ?";
 
+        // Logica
         try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement coneDetalles = conn.prepareStatement(DELETE_DETALLES); PreparedStatement coneTransacciones = conn.prepareStatement(DELETE_TRANSACCIONES); PreparedStatement pstmtVentas = conn.prepareStatement(DELETE_VENTAS); PreparedStatement pstmtUsuario = conn.prepareStatement(DELETE_USUARIO))
         {
 
@@ -485,12 +477,15 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     }
 
     // Borrar Usuario
-    private void borrarUsuario(String usuario, String contraseña) {
+    private void borrarUsuario(String usuario, String password) {
+
+        // Variables
         int idUsuario = buscarUsuario(usuario);
 
-        if (idUsuario != -1 && verificarContraseña(usuario, contraseña))
+        // Logica
+        if (idUsuario != -1 && verificarPassword(usuario, password))
         {
-            if (VentasAsociadas(idUsuario))
+            if (ventasAsociadas(idUsuario))
             {
                 int respuesta = JOptionPane.showConfirmDialog(this,
                         "No se puede borrar el Usuario ya que tiene Ventas Asociadas. ¿Quieres borrar las Ventas Asociadas?",
@@ -514,51 +509,98 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
         }
     }
 
-    // Verificar Contraseña
-    private boolean verificarContraseña(String usuario, String contraseña) {
-        String QUERY_VERIFICAR_CONTRASEÑA = "SELECT COUNT(*) FROM Usuarios WHERE usuario = ? AND contraseña = ?";
+    // Agregar Usuarios
+    private void agregarUsuario(String nombre, String usuario, String password, String tipo) {
 
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_VERIFICAR_CONTRASEÑA))
+        // Evitar usuarios vacios
+        if (nombre.isEmpty() || usuario.isEmpty() || password.isEmpty() || tipo.isEmpty())
         {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-            cone.setString(1, usuario);
-            cone.setString(2, contraseña);
+        // Query
+        String QUERY_INSERT_CAJERO = "INSERT INTO Usuarios (nombre, usuario, contraseña, tipo) VALUES (?, ?, ?, ?)";
 
+        // Logica
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_INSERT_CAJERO))
+        {
+            // Variables Insertadas
+            cone.setString(1, nombre);
+            cone.setString(2, usuario);
+            cone.setString(3, password);
+            cone.setString(4, tipo);
+
+            int rowsAffected = cone.executeUpdate();
+
+            // Logica
+            if (rowsAffected > 0)
+            {
+                JOptionPane.showMessageDialog(this, "Usuario agregado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else
+            {
+                JOptionPane.showMessageDialog(this, "Error al ingresar, este usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            limpiarPantalla();
+
+        } catch (SQLIntegrityConstraintViolationException duplicateKeyException)
+        {
+            JOptionPane.showMessageDialog(this, "Error al ingresar, este usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    // Buscar Usuario
+    private int buscarUsuario(String textoUsuario) {
+
+        // Query
+        String QUERY_OBTENER_ID = "SELECT id FROM Usuarios WHERE usuario = ?";
+
+        // Logica
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_OBTENER_ID))
+        {
+            cone.setString(1, textoUsuario);
             try (ResultSet rs = cone.executeQuery())
             {
-                return rs.next() && rs.getInt(1) > 0;
+                if (rs.next())
+                {
+                    return rs.getInt("id");
+                }
             }
         } catch (SQLException x)
         {
             throw new RuntimeException(x);
         }
+        return -1;
     }
 
-    // Verificar si hay Ventas Asociadas
-    private boolean VentasAsociadas(int idUsuario) {
-        String QUERY_VERIFICAR_VENTAS = "SELECT COUNT(*) FROM ventas WHERE id_cajero = ?";
-
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_VERIFICAR_VENTAS))
-        {
-
-            cone.setInt(1, idUsuario);
-            try (ResultSet rs = cone.executeQuery())
-            {
-                return rs.next() && rs.getInt(1) > 0;
-            }
-        } catch (SQLException x)
-        {
-            throw new RuntimeException(x);
-        }
-    }
-
+    /* Pantallas */
     // Configurar las pantallas
     private void configurarVentana() {
+
         // Centrar la ventana en el escritorio
         setLocationRelativeTo(null);
 
         // Evitar que la ventana pueda ser redimensionada
         setResizable(false);
+    }
+
+    // Regresar Pantalla
+    private void regresarPantalla(javax.swing.JFrame nuevaPantalla) {
+        dispose();
+        nuevaPantalla.setVisible(true);
+    }
+
+    // Limpiar Pantalla
+    private void limpiarPantalla() {
+        jTextField_Nombre.setText("");
+        jTextField_Usuario.setText("");
+        jPasswordField.setText("");
+        jPasswordField_Nueva.setText("");
+        jComboBox1.setSelectedIndex(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -570,9 +612,9 @@ public class Panel_Administrador_Cajeros extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Volver;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel_Contraseña;
     private javax.swing.JLabel jLabel_Nombre;
     private javax.swing.JLabel jLabel_NuevaPassword;
+    private javax.swing.JLabel jLabel_Password;
     private javax.swing.JLabel jLabel_Tipo;
     private javax.swing.JLabel jLabel_Titulo;
     private javax.swing.JLabel jLabel_Usuario;

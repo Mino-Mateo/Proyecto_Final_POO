@@ -13,12 +13,13 @@ import java.sql.*;
 /* Clase Login */
 public class Login extends javax.swing.JFrame {
 
-    // Inicializador de componentes
+    // Inicializador
     public Login() {
         initComponents();
         configurarVentana();
     }
 
+    // Componentes Graficos
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -165,7 +166,7 @@ public class Login extends javax.swing.JFrame {
         String password = new String(jPasswordField_Password.getPassword());
         String tipo = jComboBox_Usuarios.getSelectedItem().toString();
 
-        // Verificacion el usuario
+        // Logica
         if (comprobarUsuario(usuario, password, tipo))
         {
             // Dar formato al usuario
@@ -184,7 +185,6 @@ public class Login extends javax.swing.JFrame {
             MensajeError();
         }
     }//GEN-LAST:event_jButton_IngresarActionPerformed
-
 
     /* Funciones */
     // Obtener ID
@@ -308,7 +308,6 @@ public class Login extends javax.swing.JFrame {
             return false;
         }
     }
-
 
     /* Mensajes */
     // Mensaje de error

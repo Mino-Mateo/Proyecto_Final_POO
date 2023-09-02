@@ -11,24 +11,23 @@ import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter; 
-import java.awt.HeadlessException;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import sun.jvm.hotspot.debugger.Page;
 
-/* Clase Publica */
+/* Clase Administrador Historial */
 public class Panel_Administrador_Historial extends javax.swing.JFrame {
 
-    /* Inicializador */
+    // Inicializador
     public Panel_Administrador_Historial() {
         initComponents();
         configurarVentana();
     }
 
+    // Componentes Graficos
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -261,77 +260,141 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /* Botones */
     // Boton Buscar por ID de Transaccion
     private void jButton_BuscarIDTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarIDTranActionPerformed
+
+        // Variables
         String busqueda = jTextField_Busqueda.getText().trim();
+
+        //Logica
         actualizarTabla(busqueda, "t.id");
     }//GEN-LAST:event_jButton_BuscarIDTranActionPerformed
 
     // Boton Buscar por ID de Cajero
     private void jButton_BuscarIDCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarIDCajeroActionPerformed
+
+        // Variables
         String busqueda = jTextField_Busqueda.getText().trim();
+
+        //Logica
         actualizarTabla(busqueda, "t.id_cajero");
     }//GEN-LAST:event_jButton_BuscarIDCajeroActionPerformed
 
     // Boton Buscar por Nombre de Cajero
     private void jButton_BuscarNomCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarNomCajeroActionPerformed
+
+        // Variables
         String busqueda = jTextField_Busqueda.getText().trim();
+
+        //Logica
         actualizarTabla(busqueda, "u.nombre");
     }//GEN-LAST:event_jButton_BuscarNomCajeroActionPerformed
 
     // Boton Buscar por Fecha
     private void jButton_BuscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarFechaActionPerformed
+
+        // Variables
         String busqueda = jTextField_Busqueda.getText().trim();
+
+        //Logica
         actualizarTabla(busqueda, "t.fecha");
     }//GEN-LAST:event_jButton_BuscarFechaActionPerformed
 
     // Boton Buscar por Producto
     private void jButton_BuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarProductoActionPerformed
+
+        // Variables
         String busqueda = jTextField_Busqueda.getText().trim();
+
+        //Logica
         actualizarTabla(busqueda, "dt.nombre_producto");
     }//GEN-LAST:event_jButton_BuscarProductoActionPerformed
 
     // Boton Imprimir
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
         String ruta = System.getProperty("user.home");
-        String rutaCompleta = ruta + "/Desktop/mi_archivo.pdf"; 
-        Document documento=new Document();
-        
-        
-        try{
-         PdfWriter.getInstance(documento, new FileOutputStream(rutaCompleta));
+        String rutaCompleta = ruta + "/Desktop/mi_archivo.pdf";
+        Document documento = new Document();
 
-              documento.open();
-                PdfPTable tabla=new PdfPTable(8);
-                tabla.addCell("Hola soy judio");
+        try
+        {
+            PdfWriter.getInstance(documento, new FileOutputStream(rutaCompleta));
 
-        }catch(DocumentException ev){
-             JOptionPane.showMessageDialog(null, "No se pudo crear PDF");
-        } catch (FileNotFoundException ex) {
+            documento.open();
+            PdfPTable tabla = new PdfPTable(8);
+            tabla.addCell("Hola soy judio");
+
+        } catch (DocumentException ev)
+        {
+            JOptionPane.showMessageDialog(null, "No se pudo crear PDF");
+        } catch (FileNotFoundException ex)
+        {
             Logger.getLogger(Panel_Administrador_Historial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     // Boton Regresar
     private void jButton_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VolverActionPerformed
-        manejoPantalla(new Panel_Administrador_Opciones());
+
+        // Logica
+        regresarPantalla(new Panel_Administrador_Opciones());
     }//GEN-LAST:event_jButton_VolverActionPerformed
 
-    /* Busqueda Global */
-    // Mostrar en Tabla
+    /* Funciones */
+    // Query Busqueda Global
+    private String generarQuery(String columnaBusqueda, String busqueda) {
+
+        // Logica
+        if (!busqueda.isEmpty())
+        {
+            // Query
+            return "SELECT t.id, t.id_cajero, u.nombre, t.fecha, dt.nombre_producto, dt.cantidad, p.precio "
+                    + "FROM Transacciones t "
+                    + "JOIN Usuarios u ON t.id_cajero = u.id "
+                    + "JOIN DetallesTransaccion dt ON t.id = dt.id_transaccion "
+                    + "JOIN Productos p ON dt.id_producto = p.id "
+                    + "WHERE " + columnaBusqueda + " = ?";
+        } else
+        {
+            // Query
+            return "SELECT t.id, t.id_cajero, u.nombre, t.fecha, dt.nombre_producto, dt.cantidad, p.precio "
+                    + "FROM Transacciones t "
+                    + "JOIN Usuarios u ON t.id_cajero = u.id "
+                    + "JOIN DetallesTransaccion dt ON t.id = dt.id_transaccion "
+                    + "JOIN Productos p ON dt.id_producto = p.id";
+        }
+    }
+
+    // Asignar Parametros
+    private void asignarParametros(PreparedStatement stmt, String busqueda) throws SQLException {
+
+        // Logica
+        if (!busqueda.isEmpty())
+        {
+            stmt.setString(1, busqueda);
+        }
+    }
+
+    // Actualizar Tabla
     private void actualizarTabla(String busqueda, String columnaBusqueda) {
+
+        // Variables
         DefaultTableModel model = (DefaultTableModel) jTable_Historial.getModel();
         model.setRowCount(0);
-
         Connection connection = Conexion_MySQL.getConnection();
 
+        // Logica
         if (connection != null)
         {
+
+            // Query
             String query = generarQuery(columnaBusqueda, busqueda);
 
+            // Logica Actualizacion
             try (PreparedStatement stmt = connection.prepareStatement(query))
             {
-                asignarParametros(stmt, columnaBusqueda, busqueda);
+                asignarParametros(stmt, busqueda);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next())
@@ -360,36 +423,10 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
         }
     }
 
-    // Query Busqueda Global
-    private String generarQuery(String columnaBusqueda, String busqueda) {
-        if (!busqueda.isEmpty())
-        {
-            return "SELECT t.id, t.id_cajero, u.nombre, t.fecha, dt.nombre_producto, dt.cantidad, p.precio "
-                    + "FROM Transacciones t "
-                    + "JOIN Usuarios u ON t.id_cajero = u.id "
-                    + "JOIN DetallesTransaccion dt ON t.id = dt.id_transaccion "
-                    + "JOIN Productos p ON dt.id_producto = p.id "
-                    + "WHERE " + columnaBusqueda + " = ?";
-        } else
-        {
-            return "SELECT t.id, t.id_cajero, u.nombre, t.fecha, dt.nombre_producto, dt.cantidad, p.precio "
-                    + "FROM Transacciones t "
-                    + "JOIN Usuarios u ON t.id_cajero = u.id "
-                    + "JOIN DetallesTransaccion dt ON t.id = dt.id_transaccion "
-                    + "JOIN Productos p ON dt.id_producto = p.id";
-        }
-    }
-
-    // Parametros
-    private void asignarParametros(PreparedStatement stmt, String columnaBusqueda, String busqueda) throws SQLException {
-        if (!busqueda.isEmpty())
-        {
-            stmt.setString(1, busqueda);
-        }
-    }
-
     // Cerrar Conexion
     private void cerrarConexion(Connection connection) {
+
+        // Logica
         try
         {
             connection.close();
@@ -399,8 +436,10 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
         }
     }
 
+    /* Pantallas */
     // Configurar las pantallas
     private void configurarVentana() {
+
         // Centrar la ventana en el escritorio
         setLocationRelativeTo(null);
 
@@ -408,8 +447,8 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
         setResizable(false);
     }
 
-    // Manejo de Pantalla
-    private void manejoPantalla(javax.swing.JFrame nuevaPantalla) {
+    // Regresar Pantalla
+    private void regresarPantalla(javax.swing.JFrame nuevaPantalla) {
         dispose();
         nuevaPantalla.setVisible(true);
     }

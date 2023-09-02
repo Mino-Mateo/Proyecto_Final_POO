@@ -13,13 +13,13 @@ import javax.swing.table.DefaultTableModel;
 /* Clase Panel Administrador Stock */
 public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
-
-    /* Inicializador */
+    // Inicializador
     public Panel_Administrador_Stock() {
         initComponents();
         configurarVentana();
     }
 
+    // Componentes Graficos
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -408,27 +408,34 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Boton Volver
+    /* Botones */
+    // Boton Regresar
     private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
-        manejoPantalla(new Panel_Administrador_Opciones());
+        regresarPantalla(new Panel_Administrador_Opciones());
     }//GEN-LAST:event_jButton_SalirActionPerformed
 
     // Boton Agregar
     private void jButton_BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BtnAgregarActionPerformed
+
+        // Variables
         String nombreProducto = jTextField_NomProNu.getText();
         String precioProducto = jTextField_PrProNu.getText();
         String stockProducto = jTextField_StockProNu.getText();
 
+        // Logica
         if (nombreProducto.isEmpty() || precioProducto.isEmpty() || stockProducto.isEmpty())
         {
             mostrarMensajeError("Complete todos los campos");
             return;
         }
 
+        // Mensaje Confirmacion
         int confirmacion = mostrarConfirmacion("¿Está seguro que quiere ingresar este producto?");
 
+        // Logica Confirmacion
         if (confirmacion == JOptionPane.YES_OPTION)
         {
+            // Mensajes
             if (productoExiste(nombreProducto))
             {
                 mostrarMensajeError("Error al Ingresar, este producto ya existe");
@@ -449,21 +456,31 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Boton Buscar
     private void jButton_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarActionPerformed
+
+        // Variables
         String busqueda = jTextField_Busqueda.getText().trim();
+
+        // Logica
         actualizarTabla(busqueda);
     }//GEN-LAST:event_jButton_BuscarActionPerformed
 
     // Boton Actualizar Nombre
     private void jButton_ActualizarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarNombreActionPerformed
+
+        // Variables
         int selectedRow = jTable_Productos.getSelectedRow();
+
+        // Logica
         if (selectedRow == -1)
         {
-            // No se ha seleccionado ninguna fila
             JOptionPane.showMessageDialog(this, "Error: Seleccione un Producto para actualizar su nombre", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        // Variables
         int confirmResult = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer cambiar el nombre?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        // Logica
         if (confirmResult == JOptionPane.YES_OPTION)
         {
             String nuevoNombre = JOptionPane.showInputDialog(this, "Introduzca el nuevo nombre del producto:", "Actualizar Nombre", JOptionPane.PLAIN_MESSAGE);
@@ -476,15 +493,21 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Boton Actualizar Precio
     private void jButton_ActualizarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarPrecioActionPerformed
+
+        // Variables
         int selectedRow = jTable_Productos.getSelectedRow();
+
+        // Logica
         if (selectedRow == -1)
         {
-            // No se ha seleccionado ninguna fila
             JOptionPane.showMessageDialog(this, "Error: Seleccione un Producto para actualizar su precio", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        // Variables
         int confirmResult = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer cambiar el precio?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        // Logica
         if (confirmResult == JOptionPane.YES_OPTION)
         {
             String nuevoPrecioStr = JOptionPane.showInputDialog(this, "Introduzca el nuevo precio del producto:", "Actualizar Precio", JOptionPane.PLAIN_MESSAGE);
@@ -504,15 +527,21 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Boton Actualizar Stock
     private void jButton_ActualizarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarStockActionPerformed
+
+        // Variables
         int selectedRow = jTable_Productos.getSelectedRow();
+
+        // Logica
         if (selectedRow == -1)
         {
-            // No se ha seleccionado ninguna fila
             JOptionPane.showMessageDialog(this, "Error: Seleccione un Producto para actualizar su stock", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        // Variables
         int confirmResult = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer cambiar el stock?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        // Logica
         if (confirmResult == JOptionPane.YES_OPTION)
         {
             String nuevoStockStr = JOptionPane.showInputDialog(this, "Introduzca el nuevo stock del producto:", "Actualizar Stock", JOptionPane.PLAIN_MESSAGE);
@@ -530,17 +559,19 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_ActualizarStockActionPerformed
 
-    /* Logica */
-    // Pantalla Agregar Productos
-    // Verificar si el Producto esta en la base de datos
+    /* Funciones */
+    // Verificar Producto en la Base
     private boolean productoExiste(String nombreProducto) {
+
+        // Query
         String QUERY_VERIFICAR_PRODUCTO = "SELECT COUNT(*) FROM Productos WHERE nombre = ?";
 
-        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement stmt = conn.prepareStatement(QUERY_VERIFICAR_PRODUCTO))
+        // Logica
+        try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_VERIFICAR_PRODUCTO))
         {
-            stmt.setString(1, nombreProducto);
+            cone.setString(1, nombreProducto);
 
-            try (ResultSet rs = stmt.executeQuery())
+            try (ResultSet rs = cone.executeQuery())
             {
                 if (rs.next())
                 {
@@ -558,8 +589,11 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Insertar Producto
     private boolean insertarProducto(String nombreProducto, String precioProducto, String stockProducto) {
+
+        // Query
         String QUERY_INSERT_PRODUCTO = "INSERT INTO Productos (nombre, precio, stock) VALUES (?, ?, ?)";
 
+        // Logica
         try (Connection conn = Conexion_MySQL.getConnection(); PreparedStatement cone = conn.prepareStatement(QUERY_INSERT_PRODUCTO))
         {
             cone.setString(1, nombreProducto);
@@ -593,19 +627,23 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Actualizar Tabla
     private void actualizarTabla(String busqueda) {
+
+        // Variables
         DefaultTableModel model = (DefaultTableModel) jTable_Productos.getModel();
         model.setRowCount(0);
-
         Connection cone = Conexion_MySQL.getConnection();
 
+        // Logica
         if (cone != null)
         {
+            // Varible
             String query = generarQuery(busqueda);
 
-            try (PreparedStatement stmt = cone.prepareStatement(query))
+            // Logica
+            try (PreparedStatement conex = cone.prepareStatement(query))
             {
-                asignarParametros(stmt, busqueda);
-                ResultSet rs = stmt.executeQuery();
+                asignarParametros(conex, busqueda);
+                ResultSet rs = conex.executeQuery();
 
                 while (rs.next())
                 {
@@ -630,6 +668,8 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Query de Busqueda
     private String generarQuery(String busqueda) {
+
+        // Query
         if (!busqueda.isEmpty())
         {
             return "SELECT * FROM Productos WHERE nombre = ?";
@@ -640,15 +680,19 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
     }
 
     // Parametros de Busqueda
-    private void asignarParametros(PreparedStatement stmt, String busqueda) throws SQLException {
+    private void asignarParametros(PreparedStatement cone, String busqueda) throws SQLException {
+
+        // Logica
         if (!busqueda.isEmpty())
         {
-            stmt.setString(1, busqueda);
+            cone.setString(1, busqueda);
         }
     }
 
     // Cerrar Conexion de Busqueda
     private void cerrarConexion(Connection cone) {
+
+        // Logica
         try
         {
             cone.close();
@@ -660,21 +704,25 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Actualizar Nombre
     private void actualizarNombreProducto(int rowIndex, String nuevoNombre) {
+
+        // Variables
         DefaultTableModel model = (DefaultTableModel) jTable_Productos.getModel();
         int id = (int) model.getValueAt(rowIndex, 0);
-
         Connection connection = Conexion_MySQL.getConnection();
 
+        // Logica
         if (connection != null)
         {
+            // Query
             String query = "UPDATE Productos SET nombre = ? WHERE id = ?";
 
-            try (PreparedStatement stmt = connection.prepareStatement(query))
+            // Logica
+            try (PreparedStatement cone = connection.prepareStatement(query))
             {
-                stmt.setString(1, nuevoNombre);
-                stmt.setInt(2, id);
+                cone.setString(1, nuevoNombre);
+                cone.setInt(2, id);
 
-                int rowsUpdated = stmt.executeUpdate();
+                int rowsUpdated = cone.executeUpdate();
                 if (rowsUpdated > 0)
                 {
                     model.setValueAt(nuevoNombre, rowIndex, 1);
@@ -692,27 +740,32 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Actualizar Precio
     private void actualizarPrecioProducto(int rowIndex, double nuevoPrecio) {
+
+        // Mensaje
         if (nuevoPrecio < 0)
         {
             JOptionPane.showMessageDialog(this, "El precio no puede ser negativo", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        // Variables
         DefaultTableModel model = (DefaultTableModel) jTable_Productos.getModel();
         int id = (int) model.getValueAt(rowIndex, 0);
-
         Connection connection = Conexion_MySQL.getConnection();
 
+        // Logica
         if (connection != null)
         {
+            // Query
             String query = "UPDATE Productos SET precio = ? WHERE id = ?";
 
-            try (PreparedStatement stmt = connection.prepareStatement(query))
+            // Logica
+            try (PreparedStatement cone = connection.prepareStatement(query))
             {
-                stmt.setDouble(1, nuevoPrecio);
-                stmt.setInt(2, id);
+                cone.setDouble(1, nuevoPrecio);
+                cone.setInt(2, id);
 
-                int rowsUpdated = stmt.executeUpdate();
+                int rowsUpdated = cone.executeUpdate();
                 if (rowsUpdated > 0)
                 {
                     model.setValueAt(nuevoPrecio, rowIndex, 2);
@@ -730,27 +783,32 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
 
     // Actualizar Stock
     private void actualizarStockProducto(int rowIndex, int nuevoStock) {
+
+        // Mensaje
         if (nuevoStock < 0)
         {
             JOptionPane.showMessageDialog(this, "El stock no puede ser negativo", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        // Variables
         DefaultTableModel model = (DefaultTableModel) jTable_Productos.getModel();
         int id = (int) model.getValueAt(rowIndex, 0);
-
         Connection connection = Conexion_MySQL.getConnection();
 
+        // Logica
         if (connection != null)
         {
+            // Query
             String query = "UPDATE Productos SET stock = ? WHERE id = ?";
 
-            try (PreparedStatement stmt = connection.prepareStatement(query))
+            // Logica
+            try (PreparedStatement cone = connection.prepareStatement(query))
             {
-                stmt.setInt(1, nuevoStock);
-                stmt.setInt(2, id);
+                cone.setInt(1, nuevoStock);
+                cone.setInt(2, id);
 
-                int rowsUpdated = stmt.executeUpdate();
+                int rowsUpdated = cone.executeUpdate();
                 if (rowsUpdated > 0)
                 {
                     model.setValueAt(nuevoStock, rowIndex, 3);
@@ -767,27 +825,28 @@ public class Panel_Administrador_Stock extends javax.swing.JFrame {
     }
 
 
-    /* Extras */
-    // Limpiar Pantalla
-    private void limpiarPantalla() {
-        jTextField_NomProNu.setText("");
-        jTextField_PrProNu.setText("");
-        jTextField_StockProNu.setText("");
-    }
-
+    /* Pantallas */
     // Manejo de Pantalla
-    private void manejoPantalla(javax.swing.JFrame nuevaPantalla) {
+    private void regresarPantalla(javax.swing.JFrame nuevaPantalla) {
         dispose();
         nuevaPantalla.setVisible(true);
     }
 
     // Configurar las pantallas
     private void configurarVentana() {
+
         // Centrar la ventana en el escritorio
         setLocationRelativeTo(null);
 
         // Evitar que la ventana pueda ser redimensionada
         setResizable(false);
+    }
+
+    // Limpiar Pantalla
+    private void limpiarPantalla() {
+        jTextField_NomProNu.setText("");
+        jTextField_PrProNu.setText("");
+        jTextField_StockProNu.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

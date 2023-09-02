@@ -8,12 +8,13 @@ import javax.swing.*;
 /* Clase Panel Opciones Administrador */
 public class Panel_Administrador_Opciones extends javax.swing.JFrame {
 
-    /* Inicializador */
+    // Inicializador
     public Panel_Administrador_Opciones() {
         initComponents();
         configurarVentana();
     }
 
+    // Componentes Graficos
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -159,35 +160,44 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /* Logica */
+    /* Botones */
     // Boton Stock
     private void jButton_StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_StockActionPerformed
-        manejarPantalla(new Panel_Administrador_Stock());
+
+        // Logica
+        regresarPantalla(new Panel_Administrador_Stock());
     }//GEN-LAST:event_jButton_StockActionPerformed
 
     // Boton Historial
     private void jButton_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HistorialActionPerformed
-        manejarPantalla(new Panel_Administrador_Historial());
+
+        // Logica
+        regresarPantalla(new Panel_Administrador_Historial());
     }//GEN-LAST:event_jButton_HistorialActionPerformed
 
     // Boton Cajeros
     private void jButton_AddCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddCajeroActionPerformed
-        manejarPantalla(new Panel_Administrador_Cajeros());
 
+        // Logica
+        regresarPantalla(new Panel_Administrador_Cajeros());
     }//GEN-LAST:event_jButton_AddCajeroActionPerformed
 
     // Boton Salir
     private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
+
+        // Variables
         int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas salir?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+        // Logica
         if (opcion == JOptionPane.YES_OPTION)
         {
             volverALogin();
         }
     }//GEN-LAST:event_jButton_SalirActionPerformed
 
-    /* Funciones */
-    // Manejo de Pantalla
-    private void manejarPantalla(javax.swing.JFrame nuevaPantalla) {
+    /* Pantallas */
+    // Regresar Pantalla
+    private void regresarPantalla(javax.swing.JFrame nuevaPantalla) {
         dispose();
         nuevaPantalla.setVisible(true);
     }
@@ -195,13 +205,17 @@ public class Panel_Administrador_Opciones extends javax.swing.JFrame {
     // Volver al Login
     private void volverALogin() {
         dispose();
-        Login loginFrame = new Login();
-        loginFrame.setVisible(true);
+        Login loginPantalla = new Login();
+        loginPantalla.setVisible(true);
     }
 
-    // Configuracion de Pantalla
+    // Configurar las pantallas
     private void configurarVentana() {
+
+        // Centrar la ventana en el escritorio
         setLocationRelativeTo(null);
+
+        // Evitar que la ventana pueda ser redimensionada
         setResizable(false);
     }
 

@@ -115,7 +115,7 @@
                                   <Component id="jLabel_Nombre" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_Usuario" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_Tipo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_Contraseña" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="jLabel_Password" min="-2" pref="161" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -148,7 +148,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_Contraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_Password" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jPasswordField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -183,7 +183,7 @@
                 <Property name="text" type="java.lang.String" value="Usuario:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_Contrase&#xf1;a">
+            <Component class="javax.swing.JLabel" name="jLabel_Password">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
