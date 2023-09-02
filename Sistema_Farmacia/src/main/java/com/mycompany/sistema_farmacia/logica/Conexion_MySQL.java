@@ -10,7 +10,7 @@ public final class Conexion_MySQL {
     // Variables
     private static final String DB_URL = "jdbc:mysql://localhost/farmacia";
     private static final String USER = "root";
-    private static final String PASS = "root_bas3";
+    private static final String PASS = "12345";
 
     public static void cerrarConexion(Connection connection) {
         if (connection != null)

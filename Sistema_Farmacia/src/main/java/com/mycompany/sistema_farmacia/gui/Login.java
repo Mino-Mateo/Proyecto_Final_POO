@@ -13,7 +13,7 @@ import java.sql.*;
 /* Clase Login */
 public class Login extends javax.swing.JFrame {
 
-    // Inicializador de componentes 
+    // Inicializador de componentes
     public Login() {
         initComponents();
         configurarVentana();
@@ -159,136 +159,98 @@ public class Login extends javax.swing.JFrame {
     /* Botones */
     // Boton Ingresar
     private void jButton_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_IngresarActionPerformed
+
         // Variables
         String usuario = jTextField_Usuario.getText();
         String password = new String(jPasswordField_Password.getPassword());
-        String tipoUsuarioSeleccionado = jComboBox_Usuarios.getSelectedItem().toString();
+        String tipo = jComboBox_Usuarios.getSelectedItem().toString();
 
-        // Verificacion para abrir la pantalla
-        if (comprobacionUsuario(usuario, password, tipoUsuarioSeleccionado))
+        // Verificacion el usuario
+        if (comprobarUsuario(usuario, password, tipo))
         {
-            // Convertir el tipo de usuario seleccionado a mayúscula inicial
-            tipoUsuarioSeleccionado = tipoUsuarioSeleccionado.substring(0, 1).toUpperCase() + tipoUsuarioSeleccionado.substring(1);
+            // Dar formato al usuario
+            tipo = tipo.substring(0, 1).toUpperCase() + tipo.substring(1);
 
-            if ("Cajero".equals(tipoUsuarioSeleccionado))
+            // Verificar el Jcombo seleccionado
+            if ("Cajero".equals(tipo))
             {
                 abrirPantallaCajero();
-            } else if ("Administrador".equals(tipoUsuarioSeleccionado))
+            } else if ("Administrador".equals(tipo))
             {
                 abrirPantallaAdministrador();
             }
         } else
         {
-            mostrarMensajeError();
+            MensajeError();
         }
     }//GEN-LAST:event_jButton_IngresarActionPerformed
 
 
     /* Funciones */
-    /* Otras Pantallas */
-    // Abrir Pantallas del Cajero
-    private void abrirPantallaCajero() {
-    String nombreUsuarioActual = jTextField_Usuario.getText();
-    int idUsuarioActual = obtenerIdUsuario(nombreUsuarioActual);
-    String nombreCompletoUsuario = obtenerNombreUsuario(nombreUsuarioActual);
-    
-    Panel_Cajero_Ventas panelCajeroVentas = new Panel_Cajero_Ventas(nombreUsuarioActual, idUsuarioActual, nombreCompletoUsuario);
-    panelCajeroVentas.setVisible(true);
-    this.dispose();
-    }
-
-    // Abrir Pantallas del Aministrador
-    private void abrirPantallaAdministrador() {
-        Panel_Administrador_Opciones panelAdminOpciones = new Panel_Administrador_Opciones();
-        panelAdminOpciones.setVisible(true);
-        this.dispose();
-    }
-
-    /* Logica Botones */
-    // Funcion Comprobacion
-    private boolean comprobacionUsuario(String usuario, String password, String tipoUsuarioSeleccionado) {
-        String tipoUsuario = obtenerTipoUsuario(usuario);
-
-        if (tipoUsuario == null)
-        {
-            return false;
-        }
-
-        if (!tipoUsuario.equals(tipoUsuarioSeleccionado))
-        {
-            return false;
-        }
-
-        return verificarUsuario(usuario, password);
-    }
-        
     // Obtener ID
-    private int obtenerIdUsuario(String usuario) {
-        try (Connection connection = Conexion_MySQL.getConnection()) {
+    private int obtenerId(String usuario) {
+        try (Connection connection = Conexion_MySQL.getConnection())
+        {
+            // Query
             String querySeleccionarId = "SELECT id FROM Usuarios WHERE usuario = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionarId);
             preparedStatement.setString(1, usuario);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+            // Logica
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                if (resultSet.next())
+                {
                     return resultSet.getInt("id");
-                } else {
+                } else
+                {
                     return -1;
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace();
             return -1;
         }
     }
 
-    // Obtener Nombre Usuario
-    private String obtenerNombreUsuario(String usuario) {
-        try (Connection connection = Conexion_MySQL.getConnection()) {
+    // Obtener Nombre
+    private String obtenerNombre(String usuario) {
+        try (Connection connection = Conexion_MySQL.getConnection())
+        {
+            // Query
             String querySeleccionarNombre = "SELECT nombre FROM Usuarios WHERE usuario = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionarNombre);
             preparedStatement.setString(1, usuario);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+            // Logica
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                if (resultSet.next())
+                {
                     return resultSet.getString("nombre");
-                } else {
+                } else
+                {
                     return "Nombre no encontrado";
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace();
             return "Error al obtener el nombre";
         }
     }
-    
-    // Verificar Usuario
-    private boolean verificarUsuario(String usuario, String password) {
+
+    // Obtener Tipo
+    private String obtenerTipo(String usuario) {
         try (Connection connection = Conexion_MySQL.getConnection())
         {
-            String querySeleccionar = "SELECT * FROM Usuarios WHERE usuario = ? AND contraseña = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
-            preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, password);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery())
-            {
-                return resultSet.next();
-            }
-        } catch (SQLException e)
-        {
-            return false;
-        }
-    }
-
-    // Tipo Usuario
-    private String obtenerTipoUsuario(String usuario) {
-        try (Connection connection = Conexion_MySQL.getConnection())
-        {
+            // Query
             String querySeleccionar = "SELECT tipo FROM Usuarios WHERE usuario = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
             preparedStatement.setString(1, usuario);
 
+            // Logica
             try (ResultSet resultSet = preparedStatement.executeQuery())
             {
                 if (resultSet.next())
@@ -306,13 +268,55 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
+    // Comprobacion de Usuario
+    private boolean comprobarUsuario(String usuario, String password, String tipoUsuarioSeleccionado) {
+
+        // Variables
+        String tipoUsuario = obtenerTipo(usuario);
+
+        // Logica
+        if (tipoUsuario == null)
+        {
+            return false;
+        }
+
+        if (!tipoUsuario.equals(tipoUsuarioSeleccionado))
+        {
+            return false;
+        }
+
+        return verificarUsuario(usuario, password);
+    }
+
+    // Verificar Usuario
+    private boolean verificarUsuario(String usuario, String password) {
+        try (Connection connection = Conexion_MySQL.getConnection())
+        {
+            // Query
+            String querySeleccionar = "SELECT * FROM Usuarios WHERE usuario = ? AND contraseña = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySeleccionar);
+            preparedStatement.setString(1, usuario);
+            preparedStatement.setString(2, password);
+
+            // Logica
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                return resultSet.next();
+            }
+        } catch (SQLException e)
+        {
+            return false;
+        }
+    }
+
+
     /* Mensajes */
     // Mensaje de error
-    private void mostrarMensajeError() {
+    private void MensajeError() {
         JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de ingreso", JOptionPane.ERROR_MESSAGE);
     }
 
-    /* Extras */
+    /* Pantallas */
     // Configurar las pantallas
     private void configurarVentana() {
         // Centrar la ventana en el escritorio
@@ -321,7 +325,33 @@ public class Login extends javax.swing.JFrame {
         // Evitar que la ventana pueda ser redimensionada
         setResizable(false);
     }
-    
+
+    // Abrir Pantalla del Cajero
+    private void abrirPantallaCajero() {
+
+        // Variables
+        String nombreUsuarioActual = jTextField_Usuario.getText();
+        int idActual = obtenerId(nombreUsuarioActual);
+        String nombreUsuario = obtenerNombre(nombreUsuarioActual);
+
+        // Panel lateral de usuario
+        Panel_Cajero_Ventas panelCajeroVentas = new Panel_Cajero_Ventas(nombreUsuarioActual, idActual, nombreUsuario);
+        panelCajeroVentas.setVisible(true);
+
+        // Cerrar Ventana
+        this.dispose();
+    }
+
+    // Abrir Pantalla del Aministrador
+    private void abrirPantallaAdministrador() {
+
+        // Variables
+        Panel_Administrador_Opciones panelAdminOpciones = new Panel_Administrador_Opciones();
+        panelAdminOpciones.setVisible(true);
+
+        // Cerrar Ventana
+        this.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Ingresar;
