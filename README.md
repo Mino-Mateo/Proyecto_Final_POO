@@ -35,9 +35,9 @@ Tomando en cuenta que su equipo de trabajo es parte del cliente, es decir tiene 
 Dicha solución debe ser desarrollada en java aplicando los conceptos de Programación Orientada a Objetos revisados en el presente semestre.
 
 
-## **JFRAMES**
+# JFRAMES
 
-# Administrador
+## **Administrador**
 
 **Login**
 
@@ -74,10 +74,17 @@ Dicha solución debe ser desarrollada en java aplicando los conceptos de Progra
 </p>
 
 
-# Cajero
+## **Cajero**
 
 **Venta de Productos**
 
 <p align="center">
     <img src="Imagenes/Pantallas%20Finales/Venta%20.png" width="560">
+</p>
+
+
+# Conexion MYSQL
+
+<p align="center">
+    <img src="Imagenes/Logica/Conexion%20MYSQL.png" width="560">
 </p>
