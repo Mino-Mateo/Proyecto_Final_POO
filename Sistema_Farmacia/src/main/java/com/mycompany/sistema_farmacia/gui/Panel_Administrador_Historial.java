@@ -3,6 +3,7 @@ package main.java.com.mycompany.sistema_farmacia.gui;
 
 /* Clase Publica */
 // Clases o Paquetes
+import com.itextpdf.text.Chunk;
 import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
 
 // Librerias
@@ -10,11 +11,17 @@ import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Font;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
+import java.util.Date;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -313,25 +320,44 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
 
     // Boton Imprimir
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
-        String ruta = System.getProperty("user.home");
-        String rutaCompleta = ruta + "/Desktop/mi_archivo.pdf";
-        Document documento = new Document();
-
-        try
-        {
-            PdfWriter.getInstance(documento, new FileOutputStream(rutaCompleta));
-
-            documento.open();
-            PdfPTable tabla = new PdfPTable(8);
-            tabla.addCell("Hola soy judio");
-
-        } catch (DocumentException ev)
-        {
-            JOptionPane.showMessageDialog(null, "No se pudo crear PDF");
-        } catch (FileNotFoundException ex)
-        {
-            Logger.getLogger(Panel_Administrador_Historial.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      try{
+       FileOutputStream Archivo;
+       File file=new File("/Desktop/Venta.pdf");
+       Archivo= new FileOutputStream(file);
+       Document doc=new Document();
+       PdfWriter.getInstance(doc, Archivo);
+       
+        doc.open();
+        Paragraph fecha = new Paragraph();
+        fecha.add(Chunk.NEWLINE);
+        Date date = new Date();
+        fecha.add("Fecha: " + new SimpleDateFormat("dd-MM-yy").format(date) + "\n\n");
+        
+        PdfPTable Tabla= new PdfPTable(4);
+        Tabla.setWidthPercentage(100);
+        Tabla.getDefaultCell().setBorder(0);
+        float[] ColumnaTabla=new float[]{20f,30f,70f,40f};
+        Tabla.setWidths(ColumnaTabla);
+        Tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
+        
+        String id="Identificacion codigo";
+        String Nombre="Nombre: ";
+        String Precio="Precio: ";
+        String Total="Total";
+        
+        Tabla.addCell("");
+        Tabla.addCell("ID"+id+"Nombre: "+Nombre+"Precio: "+Precio+"Total: "+Total);
+        Tabla.addCell(fecha);
+        doc.add(Tabla);
+        
+        
+        
+        
+       doc.close();
+       Archivo.close();
+      
+      }catch(Exception e){}
+       
     }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     // Boton Regresar
