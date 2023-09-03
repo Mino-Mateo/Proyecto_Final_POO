@@ -10,23 +10,16 @@ import main.java.com.mycompany.sistema_farmacia.logica.Conexion_MySQL;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.Font;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
 import java.util.Date;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /* Clase Administrador Historial */
 public class Panel_Administrador_Historial extends javax.swing.JFrame {
@@ -323,7 +316,7 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
 
     // Boton Imprimir
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
-try
+        try
         {
             String ruta = System.getProperty("user.home");
 
@@ -424,7 +417,7 @@ try
         {
             ex.printStackTrace();
         }
- 
+
     }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     // Boton Regresar
