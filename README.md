@@ -79,5 +79,5 @@ Dicha solución debe ser desarrollada en java aplicando los conceptos de Progra
 **Venta de Productos**
 
 <p align="center">
-    <img src="Imagenes/Pantallas%20Finales/Venta.JPG" width="560">
+    <img src="Imagenes/Pantallas%20Finales/Venta%20.png" width="560">
 </p>
