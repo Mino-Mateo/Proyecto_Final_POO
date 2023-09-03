@@ -13,12 +13,15 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.Date;
@@ -320,44 +323,108 @@ public class Panel_Administrador_Historial extends javax.swing.JFrame {
 
     // Boton Imprimir
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
-      try{
-       FileOutputStream Archivo;
-       File file=new File("/Desktop/Venta.pdf");
-       Archivo= new FileOutputStream(file);
-       Document doc=new Document();
-       PdfWriter.getInstance(doc, Archivo);
-       
-        doc.open();
-        Paragraph fecha = new Paragraph();
-        fecha.add(Chunk.NEWLINE);
-        Date date = new Date();
-        fecha.add("Fecha: " + new SimpleDateFormat("dd-MM-yy").format(date) + "\n\n");
-        
-        PdfPTable Tabla= new PdfPTable(4);
-        Tabla.setWidthPercentage(100);
-        Tabla.getDefaultCell().setBorder(0);
-        float[] ColumnaTabla=new float[]{20f,30f,70f,40f};
-        Tabla.setWidths(ColumnaTabla);
-        Tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
-        
-        String id="Identificacion codigo";
-        String Nombre="Nombre: ";
-        String Precio="Precio: ";
-        String Total="Total";
-        
-        Tabla.addCell("");
-        Tabla.addCell("ID"+id+"Nombre: "+Nombre+"Precio: "+Precio+"Total: "+Total);
-        Tabla.addCell(fecha);
-        doc.add(Tabla);
-        
-        
-        
-        
-       doc.close();
-       Archivo.close();
-      
-      }catch(Exception e){}
-       
+try
+        {
+            String ruta = System.getProperty("user.home");
+
+            // Generar un nombre de archivo único utilizando la marca de tiempo actual
+            String nombreArchivo = "Venta_" + System.currentTimeMillis() + ".pdf";
+            String rutaCompleta = ruta + "/Desktop/" + nombreArchivo;
+
+            Document doc = new Document();
+
+            // Crear un objeto PdfWriter para escribir en el documento
+            PdfWriter.getInstance(doc, new FileOutputStream(rutaCompleta));
+
+            // Abrir el documento antes de agregar contenido
+            doc.open();
+
+            // Agregar fecha al documento
+            Paragraph fecha = new Paragraph();
+            fecha.add(Chunk.NEWLINE);
+            Date date = new Date();
+            fecha.add("Fecha: " + new SimpleDateFormat("dd-MM-yy").format(date) + "\n\n");
+            doc.add(fecha);
+
+            // Crear una tabla para los productos
+            PdfPTable tablaProductos = new PdfPTable(8);
+            tablaProductos.setWidthPercentage(100);
+            tablaProductos.setWidths(new float[]
+            {
+                20f, 30f, 30f, 30f, 30f, 30f, 30f, 40f
+            });
+            tablaProductos.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+            // Encabezados de la tabla de productos
+            PdfPCell celdaEncabezadoIDTran = new PdfPCell(new Phrase("ID Transaccion"));
+            PdfPCell celdaEncabezadoIDCaje = new PdfPCell(new Phrase("ID Cajero"));
+            PdfPCell celdaEncabezadoNombCaje = new PdfPCell(new Phrase("Nombre Cajero"));
+            PdfPCell celdaEncabezadoFech = new PdfPCell(new Phrase("Fecha y Hora"));
+            PdfPCell celdaEncabezadoProdu = new PdfPCell(new Phrase("Producto"));
+            PdfPCell celdaEncabezadoCanProdu = new PdfPCell(new Phrase("Cantidad Producto"));
+            PdfPCell celdaEncabezadoPrec = new PdfPCell(new Phrase("Precio"));
+            PdfPCell celdaEncabezadoTotal = new PdfPCell(new Phrase("Total"));
+
+            // Añadir encabezados a la tabla de productos
+            tablaProductos.addCell(celdaEncabezadoIDTran);
+            tablaProductos.addCell(celdaEncabezadoIDCaje);
+            tablaProductos.addCell(celdaEncabezadoNombCaje);
+            tablaProductos.addCell(celdaEncabezadoFech);
+            tablaProductos.addCell(celdaEncabezadoProdu);
+            tablaProductos.addCell(celdaEncabezadoCanProdu);
+            tablaProductos.addCell(celdaEncabezadoPrec);
+            tablaProductos.addCell(celdaEncabezadoTotal);
+
+            // Obtener el índice de la fila seleccionada por el usuario
+            int filaSeleccionada = jTable_Historial.getSelectedRow();
+
+            if (filaSeleccionada >= 0)
+            {
+                // Obtener el ID de transacción de la fila seleccionada
+                String idTransaccionSeleccionada = jTable_Historial.getValueAt(filaSeleccionada, 0).toString();
+
+                // Obtener datos de la tabla jTable_Historial y agregar solo las filas con el mismo ID de transacción
+                DefaultTableModel model = (DefaultTableModel) jTable_Historial.getModel();
+                int rowCount = model.getRowCount();
+
+                for (int i = 0; i < rowCount; i++)
+                {
+                    String idTransaccion = model.getValueAt(i, 0).toString();
+
+                    if (idTransaccion.equals(idTransaccionSeleccionada))
+                    {
+                        String idCajero = model.getValueAt(i, 1).toString();
+                        String nombreCajero = model.getValueAt(i, 2).toString();
+                        String fechaTransaccion = model.getValueAt(i, 3).toString();
+                        String nombreProducto = model.getValueAt(i, 4).toString();
+                        String cantidadProducto = model.getValueAt(i, 5).toString();
+                        String precioProducto = model.getValueAt(i, 6).toString();
+                        String totalProducto = model.getValueAt(i, 7).toString();
+
+                        tablaProductos.addCell(idTransaccion);
+                        tablaProductos.addCell(idCajero);
+                        tablaProductos.addCell(nombreCajero);
+                        tablaProductos.addCell(fechaTransaccion);
+                        tablaProductos.addCell(nombreProducto);
+                        tablaProductos.addCell(cantidadProducto);
+                        tablaProductos.addCell(precioProducto);
+                        tablaProductos.addCell(totalProducto);
+                    }
+                }
+            }
+
+            // Agregar la tabla de productos al documento
+            doc.add(tablaProductos);
+
+            // Cerrar el documento después de agregar contenido
+            doc.close();
+
+            // Aquí puedes agregar código adicional si es necesario, como mostrar un mensaje de éxito.
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+ 
     }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     // Boton Regresar
