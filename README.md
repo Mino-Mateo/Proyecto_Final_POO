@@ -85,6 +85,42 @@ Dicha solución debe ser desarrollada en java aplicando los conceptos de Progra
 
 # Conexion MYSQL
 
+
+A continuacion podemos observar el codigo que se uso en el proyecto para poder realizar la conexion a MYSQL
+
 <p align="center">
     <img src="Imagenes/Logica/Conexion%20MYSQL.png" width="560">
 </p>
+
+# Base de Datos
+
+## **Creacion de la base de datos y las tablas**
+
+<p align="center">
+    <img src="Imagenes/Logica/Base%20de%20datos-Tablas.png" width="560">
+</p>
+
+<p align="center">
+    <img src="Imagenes/Logica/Base%20de%20datos-Tablas2.png" width="560">
+</p>
+
+
+## **Optimizacion de busquedas con indices**
+
+<p align="center">
+    <img src="Imagenes/Logica/Base%20de%20datos-Indices.png" width="560">
+</p>
+
+
+## **Insertar datos en las tablas**
+
+<p align="center">
+    <img src="Imagenes/Logica/Base%20de%20datos-Insertar%20Usuarios.png" width="560">
+</p>
+
+
+<p align="center">
+    <img src="Imagenes/Logica/Base%20de%20datos-Insertar%20Productos.png" width="560">
+</p>
+
+
