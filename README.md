@@ -34,6 +34,12 @@ Tomando en cuenta que su equipo de trabajo es parte del cliente, es decir tiene 
 
 Dicha solución debe ser desarrollada en java aplicando los conceptos de Programación Orientada a Objetos revisados en el presente semestre.
 
+-----------------------------------
+
+Link del video: https://www.youtube.com/watch?v=JcjM4-_-y28 
+
+-----------------------------------
+
 
 # JFRAMES
 
