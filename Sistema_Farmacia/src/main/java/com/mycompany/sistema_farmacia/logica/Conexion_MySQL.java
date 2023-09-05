@@ -12,12 +12,13 @@ public final class Conexion_MySQL {
     private static final String USER = "root";
     private static final String PASS = "12345";
 
-    public static void cerrarConexion(Connection connection) {
-        if (connection != null)
+    // Cerrar Conexion
+    public static void cerrarConexion(Connection cone) {
+        if (cone != null)
         {
             try
             {
-                connection.close();
+                cone.close();
             } catch (SQLException e)
             {
                 e.printStackTrace();
@@ -25,21 +26,21 @@ public final class Conexion_MySQL {
         }
     }
 
-    // Constructor privado para evitar instanciación
+    // Constructor
     private Conexion_MySQL() {
-        // Constructor vacío o lógica adicional si es necesario
+
     }
 
-    // Métodos y propiedades estáticas de la clase
+    // Métodos y propiedades
     public static Connection getConnection() {
-        Connection connection = null;
+        Connection cone = null;
         try
         {
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            cone = DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return connection;
+        return cone;
     }
 }
